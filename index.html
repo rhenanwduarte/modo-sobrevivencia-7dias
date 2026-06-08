@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#07090E">
+<title>Modo Sobrevivência — Protocolo 7 Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Meta Pixel + CAPI -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+var MS_TRACKING={pixelId:'1546336063626800',capiUrl:'/api/track',debug:false,
+products:{'7dias':{content_name:'Protocolo 7 Dias — Modo Sobrevivência',content_type:'product',content_ids:['protocolo-7dias'],value:37.00,currency:'BRL'},'21dias':{content_name:'Protocolo 21 Dias — Modo Sobrevivência',content_type:'product',content_ids:['protocolo-21dias'],value:97.00,currency:'BRL'}}};
+function msUUID(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16)});}
+function msGetFbp(){var m=document.cookie.match(/_fbp=([^;]+)/);return m?m[1]:undefined;}
+function msGetFbc(){var m=document.cookie.match(/_fbc=([^;]+)/);if(m)return m[1];var u=location.search.match(/fbclid=([^&]+)/);if(u)return'fb.1.'+Date.now()+'.'+u[1];return undefined;}
+function msTrack(en,cd,ud){cd=cd||{};ud=ud||{};var eid=msUUID();fbq('track',en,cd,{eventID:eid});fetch(MS_TRACKING.capiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventName:en,eventId:eid,eventSourceUrl:location.href,userData:Object.assign({fbp:msGetFbp(),fbc:msGetFbc()},ud||{}),customData:cd})}).catch(function(){});}
+window.msViewContent=function(k){var p=MS_TRACKING.products[k]||MS_TRACKING.products['7dias'];msTrack('ViewContent',{content_name:p.content_name,content_type:p.content_type,content_ids:p.content_ids,value:p.value,currency:p.currency});};
+window.msLead=function(ud){msTrack('Lead',{content_name:'Diagnóstico Modo Sobrevivência',currency:'BRL'},ud||{});};
+window.msInitiateCheckout=function(k){var p=MS_TRACKING.products[k]||MS_TRACKING.products['7dias'];msTrack('InitiateCheckout',{content_name:p.content_name,content_type:p.content_type,content_ids:p.content_ids,value:p.value,currency:p.currency,num_items:1});};
+window.msContact=function(){msTrack('Contact');};
+fbq('init',MS_TRACKING.pixelId);fbq('track','PageView',{},{eventID:msUUID()});
+fetch(MS_TRACKING.capiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventName:'PageView',eventId:msUUID(),eventSourceUrl:location.href,userData:{fbp:msGetFbp(),fbc:msGetFbc()}})}).catch(function(){});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1546336063626800&ev=PageView&noscript=1"/></noscript>
+<style>
+:root{
+  --bg:#07090E;--bg2:#0F1117;--bg3:#181B24;--bg4:#22262F;
+  --og:#FF6B00;--oglo:rgba(255,107,0,.1);--ogmd:rgba(255,107,0,.22);
+  --white:#FFF;--g1:#B0B4BE;--g2:#5A5F6E;--g3:#2A2D35;
+  --green:#2ECC71;--red:#E74C3C;--blue:#6B8EFF;
+  --r:12px;--rs:6px;
+  --ease:cubic-bezier(.4,0,.2,1);--spring:cubic-bezier(.34,1.56,.64,1);
+  --fh:'Barlow Condensed','Impact',sans-serif;
+  --fb:'Barlow',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--fb);font-size:16px;line-height:1.6;min-height:100vh;overflow-x:hidden;}
+button{font-family:inherit;border:none;cursor:pointer;background:none;}
+input,textarea{font-family:inherit;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.042'/%3E%3C/svg%3E");
+  background-size:200px 200px;}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .5s var(--ease);}
+#loader.out{opacity:0;pointer-events:none;}
+.ld-rings{width:76px;height:76px;position:relative;display:flex;align-items:center;justify-content:center;}
+.ld-r{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--og);animation:ldr 2.2s ease-in-out infinite;}
+.ld-r:nth-child(2){animation-delay:.7s;opacity:.5;}.ld-r:nth-child(3){animation-delay:1.4s;opacity:.25;}
+@keyframes ldr{0%{transform:scale(.5);opacity:.9;}100%{transform:scale(1.7);opacity:0;}}
+.ld-core{width:38px;height:38px;background:var(--og);border-radius:9px;display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 22px rgba(255,107,0,.5);}
+.ld-brand{font-family:var(--fh);font-weight:900;font-size:15px;letter-spacing:.16em;color:var(--og);}
+.ld-bar{width:110px;height:2px;background:var(--bg3);border-radius:1px;overflow:hidden;}
+.ld-fill{height:100%;background:var(--og);width:0;animation:ldfill 1.4s var(--ease) forwards .2s;}
+@keyframes ldfill{to{width:100%;}}
+/* APP */
+#app{max-width:480px;margin:0 auto;min-height:100vh;}
+.screen{display:none;opacity:0;min-height:100vh;}
+.screen.active{display:block;animation:sci .36s var(--ease) forwards;}
+@keyframes sci{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:translateX(0);}}
+/* BUTTONS */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:18px 24px;border-radius:var(--r);font-family:var(--fh);font-weight:700;font-size:18px;letter-spacing:.07em;transition:all .2s var(--ease);position:relative;overflow:hidden;}
+.btn-og{background:var(--og);color:#fff;}
+.btn-og::before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);background-size:200% 100%;background-position:200% 0;animation:shim 3.5s ease-in-out infinite 1.5s;}
+@keyframes shim{0%{background-position:200% 0;}40%{background-position:-200% 0;}100%{background-position:-200% 0;}}
+.btn-og::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.12),transparent 55%);pointer-events:none;}
+.btn-og:hover{background:#FF7C1A;transform:translateY(-2px);box-shadow:0 0 30px rgba(255,107,0,.35);}
+.btn-og:active{transform:scale(.97);}
+.btn-ghost{background:transparent;color:var(--g1);border:1px solid var(--bg4);font-size:15px;font-weight:500;font-family:var(--fb);}
+.btn-ghost:hover{border-color:var(--g2);color:var(--white);}
+.btn-pulse{animation:bpulse 2.5s ease-in-out infinite;}
+@keyframes bpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.4);}50%{box-shadow:0 0 0 12px rgba(255,107,0,0);}}
+/* MISC */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:dp 2s infinite;}
+@keyframes dp{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+.stag{display:inline-block;padding:4px 10px;border-radius:var(--rs);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.stag-og{color:var(--og);background:var(--oglo);border:1px solid var(--ogmd);}
+.stag-pur{color:#A78BFA;background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.18);}
+.stag-grn{color:var(--green);background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.18);}
+.stag-blu{color:var(--blue);background:rgba(107,142,255,.09);border:1px solid rgba(107,142,255,.2);}
+.spacer{height:90px;}
+/* WELCOME */
+#screen-welcome{display:none;flex-direction:column;justify-content:space-between;padding:48px 24px 40px;min-height:100vh;position:relative;overflow:hidden;}
+#screen-welcome.active{display:flex;animation:sci .36s var(--ease) forwards;}
+.wl-glow{position:absolute;bottom:-5%;left:50%;transform:translateX(-50%);width:420px;height:300px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse,rgba(255,107,0,.12) 0%,transparent 70%);}
+.wl-top{display:flex;flex-direction:column;gap:0;}
+.wl-logo{display:flex;align-items:center;gap:10px;margin-bottom:52px;}
+.wl-icon{width:42px;height:42px;background:var(--og);border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,107,0,.4);}
+.wl-brand{font-family:var(--fh);font-weight:900;font-size:14px;letter-spacing:.12em;color:var(--og);}
+.wl-eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);margin-bottom:12px;}
+.wl-h1{font-family:var(--fh);font-weight:900;font-size:clamp(44px,13vw,72px);line-height:.9;letter-spacing:-.02em;margin-bottom:20px;}
+.wl-h1 em{color:var(--og);font-style:italic;}
+.wl-sub{font-size:15px;color:var(--g1);line-height:1.78;max-width:340px;}
+.wl-bottom{display:flex;flex-direction:column;gap:12px;}
+.wl-stats{display:flex;gap:12px;margin-bottom:4px;}
+.wl-stat{flex:1;padding:14px 12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:10px;text-align:center;}
+.wl-stat-val{font-family:var(--fh);font-weight:900;font-size:24px;color:var(--white);line-height:1;}
+.wl-stat-lbl{font-size:10px;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+/* QUIZ */
+#screen-quiz{display:none;flex-direction:column;min-height:100vh;}
+#screen-quiz.active{display:flex;animation:sci .36s var(--ease) forwards;}
+.quiz-header{padding:24px 24px 0;display:flex;flex-direction:column;gap:14px;}
+.quiz-prog-row{display:flex;align-items:center;gap:12px;}
+.quiz-step{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--g2);white-space:nowrap;}
+.qpbar{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.qpfill{height:100%;background:linear-gradient(to right,var(--og),#FF9A40);border-radius:2px;transition:width .5s var(--ease);}
+.quiz-q{font-family:var(--fh);font-weight:900;font-size:clamp(22px,6vw,32px);line-height:1.1;padding:20px 24px 0;}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;padding:18px 24px 0;flex:1;}
+.qopt{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);cursor:pointer;transition:all .18s var(--ease);position:relative;overflow:hidden;}
+.qopt:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);}
+.qopt.sel{background:rgba(255,107,0,.08);border-color:var(--og);}
+.qopt-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s var(--ease);}
+.qopt.sel .qopt-dot{background:var(--og);border-color:var(--og);}
+.qopt-check{font-size:12px;color:#fff;opacity:0;transition:opacity .18s;}
+.qopt.sel .qopt-check{opacity:1;}
+.qopt-text{font-size:15px;color:var(--g1);line-height:1.45;transition:color .18s;}
+.qopt.sel .qopt-text{color:var(--white);}
+.qopt-shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,107,0,.08) 50%,transparent 60%);background-size:200% 100%;background-position:200% 0;}
+.qopt.sel .qopt-shine{animation:qshine .5s var(--ease) forwards;}
+@keyframes qshine{to{background-position:-200% 0;}}
+.quiz-nav{padding:20px 24px 40px;display:flex;flex-direction:column;gap:10px;}
+.btn-next{opacity:.28;pointer-events:none;transition:all .22s;}
+.btn-next.on{opacity:1;pointer-events:all;}
+/* PROCESSING */
+#screen-proc{display:none;flex-direction:column;align-items:center;justify-content:center;gap:28px;min-height:100vh;padding:40px 24px;position:relative;overflow:hidden;}
+#screen-proc.active{display:flex;animation:sci .36s var(--ease) forwards;}
+.proc-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,107,0,.08) 0%,transparent 65%);pointer-events:none;}
+.proc-brain{position:relative;width:140px;height:140px;flex-shrink:0;}
+.proc-msg{font-family:var(--fh);font-weight:900;font-size:22px;text-align:center;min-height:32px;}
+.proc-sub{font-size:14px;color:var(--g1);text-align:center;max-width:280px;line-height:1.6;}
+.proc-bar-wrap{width:220px;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.proc-bar-fill{height:100%;background:linear-gradient(to right,var(--og),#FF9A40);border-radius:2px;width:0;transition:width .3s var(--ease);}
+/* REPORT */
+#screen-report{padding:0 0 40px;min-height:100vh;}
+.rep-hero{padding:36px 24px 28px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c1005 0%,var(--bg) 70%);border-bottom:1px solid rgba(255,107,0,.1);}
+.rep-hero::after{content:'';position:absolute;right:-10px;bottom:-20px;font-family:var(--fh);font-weight:900;font-size:160px;line-height:1;color:var(--white);opacity:.03;pointer-events:none;}
+.rep-badge{display:flex;align-items:center;gap:14px;margin-bottom:18px;animation:badgein .6s var(--spring) .3s both;}
+@keyframes badgein{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
+.rep-badge-icon{width:62px;height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.rep-badge-icon.og{background:rgba(255,107,0,.15);border:1px solid rgba(255,107,0,.3);box-shadow:0 0 20px rgba(255,107,0,.15);}
+.rep-badge-icon.bl{background:rgba(107,142,255,.15);border:1px solid rgba(107,142,255,.3);}
+.rep-badge-icon.rd{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);}
+.rep-profile-type{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--og);margin-bottom:4px;}
+.rep-profile-name{font-family:var(--fh);font-weight:900;font-size:28px;line-height:1.05;}
+.rep-eyebrow{font-size:11px;color:var(--g2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.rep-sub{font-size:14px;color:var(--g1);line-height:1.72;max-width:360px;}
+.rep-body{padding:20px 24px 0;}
+.rep-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:12px;padding:18px;margin-bottom:14px;}
+.rep-card-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:14px;}
+.trig-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.trig-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;color:var(--og);background:var(--oglo);border:1px solid var(--ogmd);}
+.rep-meter{margin-bottom:14px;}
+.rep-meter:last-child{margin-bottom:0;}
+.rep-meter-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.rep-meter-label{font-size:13px;color:var(--g1);}
+.rep-meter-val{font-family:var(--fh);font-weight:700;font-size:15px;}
+.rep-meter-bar{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.rep-meter-fill{height:100%;border-radius:3px;width:0;transition:width 1.2s var(--ease);}
+.fill-red{background:linear-gradient(to right,#c0392b,var(--red));}
+.fill-og{background:linear-gradient(to right,#e65c00,var(--og));}
+.fill-grn{background:linear-gradient(to right,#27ae60,var(--green));}
+/* DAY SCREENS */
+.day-scr{min-height:100vh;padding-bottom:90px;}
+.day-hero{padding:24px 24px 26px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c1005 0%,var(--bg) 70%);border-bottom:1px solid rgba(255,107,0,.12);}
+.day-bgn{position:absolute;right:-8px;bottom:-18px;font-family:var(--fh);font-weight:900;font-size:168px;line-height:1;color:var(--white);opacity:.035;letter-spacing:-8px;pointer-events:none;user-select:none;}
+.day-prog-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.day-lbl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--og);white-space:nowrap;}
+.dpbar{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.dpfill{height:100%;background:linear-gradient(to right,var(--og),#FF9A40);border-radius:2px;box-shadow:0 0 8px rgba(255,107,0,.4);}
+.day-h1{font-family:var(--fh);font-weight:900;font-size:clamp(28px,7.5vw,42px);line-height:1.06;}
+.day-body{padding:20px 24px 0;}
+.cc{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:20px;margin-bottom:14px;}
+.cc-title{font-family:var(--fh);font-size:18px;font-weight:700;margin-bottom:10px;}
+.cc-text{font-size:14px;color:var(--g1);line-height:1.82;}
+.cc-text p+p{margin-top:12px;}
+.steps{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:10px;counter-reset:step;}
+.steps li{display:flex;gap:12px;font-size:14px;color:var(--g1);line-height:1.58;counter-increment:step;}
+.steps li::before{content:counter(step);width:26px;height:26px;flex-shrink:0;border-radius:50%;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.22);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:700;font-size:13px;color:var(--og);margin-top:1px;}
+.chal-inner{background:rgba(46,204,113,.04);border:1px solid rgba(46,204,113,.13);border-radius:8px;padding:16px;margin-top:10px;}
+.chal-text{font-size:14px;color:var(--g1);line-height:1.72;}
+.btn-done{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 48px);margin:20px 24px 0;padding:18px 24px;background:var(--og);color:#fff;border-radius:var(--r);font-family:var(--fh);font-weight:700;font-size:18px;letter-spacing:.07em;transition:all .2s var(--ease);position:relative;overflow:hidden;}
+.btn-done::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,.12),transparent 55%);pointer-events:none;}
+.btn-done:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,107,0,.35);}
+.btn-done.done{background:#27ae60;pointer-events:none;}
+/* INTERACTIVE ELEMENTS */
+/* Trigger map */
+.trig-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 0;}
+.trig-card{padding:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .18s var(--ease);text-align:center;}
+.trig-card:hover{background:rgba(255,255,255,.06);}
+.trig-card.sel{background:rgba(255,107,0,.1);border-color:rgba(255,107,0,.35);}
+.trig-card-icon{font-size:26px;margin-bottom:6px;}
+.trig-card-name{font-family:var(--fh);font-weight:700;font-size:14px;margin-bottom:3px;}
+.trig-card-desc{font-size:11px;color:var(--g2);line-height:1.4;}
+.trig-result{margin-top:14px;padding:14px;background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.15);border-radius:8px;font-size:13px;color:var(--g1);line-height:1.6;min-height:48px;}
+/* Breathing */
+.bwrap{display:flex;flex-direction:column;align-items:center;gap:18px;padding:18px 0;}
+.bring{position:relative;width:136px;height:136px;}
+.b-arc{fill:none;stroke:var(--og);stroke-width:4;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;transform-origin:68px 68px;transform:rotate(-90deg);transition:stroke .3s;}
+.b-bg{fill:rgba(255,107,0,.07);}
+.bcenter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.b-num{font-family:var(--fh);font-weight:900;font-size:36px;line-height:1;}
+.b-phase{font-size:10px;color:var(--g2);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.b-instr{font-size:13px;color:var(--g1);text-align:center;}
+.b-btn{padding:11px 26px;background:var(--og);color:#fff;border-radius:var(--r);font-family:var(--fh);font-weight:700;font-size:16px;letter-spacing:.06em;transition:all .2s;}
+.b-btn:hover{background:#FF7C1A;}
+.b-count{font-size:12px;color:var(--g2);}
+/* Reward builder */
+.rew-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.rew-chip{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:500;color:var(--g1);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:all .18s;}
+.rew-chip:hover{border-color:var(--og);color:var(--og);}
+.rew-chip.sel{background:var(--oglo);border-color:var(--og);color:var(--og);}
+.rew-input-row{display:flex;gap:8px;}
+.rew-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:11px 14px;font-size:14px;color:var(--white);outline:none;transition:border-color .2s;}
+.rew-input:focus{border-color:var(--og);}
+.rew-input::placeholder{color:var(--g2);}
+.rew-add-btn{padding:11px 16px;background:var(--og);color:#fff;border-radius:8px;font-family:var(--fh);font-weight:700;font-size:15px;white-space:nowrap;transition:background .2s;}
+.rew-add-btn:hover{background:#FF7C1A;}
+.rew-list{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+.rew-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;font-size:13px;color:var(--g1);}
+.rew-item::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+/* Body map */
+.bodymap-wrap{display:flex;gap:16px;align-items:flex-start;padding:8px 0;}
+.bodymap-svg{width:100px;flex-shrink:0;}
+.bodymap-zones{flex:1;display:flex;flex-direction:column;gap:8px;}
+.bz{padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;cursor:pointer;transition:all .18s;font-size:13px;color:var(--g1);}
+.bz:hover{background:rgba(255,107,0,.06);}
+.bz.sel{background:rgba(255,107,0,.1);border-color:rgba(255,107,0,.3);color:var(--white);}
+.bz-row{display:flex;align-items:center;gap:8px;}
+.bz-icon{font-size:16px;flex-shrink:0;}
+.bodymap-result{margin-top:12px;padding:12px;background:rgba(255,107,0,.04);border:1px solid rgba(255,107,0,.12);border-radius:8px;font-size:13px;color:var(--g1);line-height:1.6;min-height:44px;}
+/* Night protocol */
+.np-steps{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+.np-step{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);border-radius:10px;cursor:pointer;transition:all .18s;}
+.np-step.chk{background:rgba(46,204,113,.07);border-color:rgba(46,204,113,.2);}
+.np-circle{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;transition:all .18s;}
+.np-step.chk .np-circle{background:var(--green);border-color:var(--green);color:#fff;}
+.np-step-text{font-size:13px;color:var(--g1);flex:1;}
+.np-step.chk .np-step-text{color:var(--white);}
+/* Identity builder */
+.id-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.id-opt{padding:13px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .18s;font-size:14px;color:var(--g1);position:relative;padding-left:44px;}
+.id-opt::before{content:'○';position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--g2);transition:all .18s;}
+.id-opt.sel{background:rgba(255,107,0,.08);border-color:var(--og);color:var(--white);}
+.id-opt.sel::before{content:'✓';color:var(--og);}
+.id-card{background:linear-gradient(135deg,rgba(255,107,0,.08),rgba(255,107,0,.02));border:1px solid rgba(255,107,0,.25);border-radius:12px;padding:18px;text-align:center;}
+.id-card-top{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--og);margin-bottom:8px;}
+.id-card-text{font-family:var(--fh);font-weight:900;font-size:22px;line-height:1.2;color:var(--white);}
+/* NAV */
+#nav7{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(7,9,14,.96);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.06);padding:10px 14px 12px;z-index:100;display:none;gap:5px;}
+#nav7.show{display:flex;}
+.nd{flex:1;padding:7px 4px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:6px;color:var(--g2);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;transition:all .18s;}
+.nd .nn{font-family:var(--fh);font-size:13px;font-weight:700;line-height:1;}
+.nd .nl{font-size:7px;letter-spacing:.04em;text-transform:uppercase;}
+.nd.cur{background:var(--og);border-color:var(--og);color:#fff;}
+.nd.done-n{background:rgba(46,204,113,.09);border-color:rgba(46,204,113,.2);color:var(--green);}
+.nd.lock-n{opacity:.2;cursor:not-allowed;}
+/* DAY 7 UPSELL */
+.up-card{background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(255,107,0,.03));border:1px solid rgba(255,107,0,.3);border-radius:14px;padding:22px;margin-bottom:14px;position:relative;overflow:hidden;}
+.up-card::before{content:'';position:absolute;inset:-1px;border-radius:15px;background:linear-gradient(135deg,rgba(255,107,0,.45),transparent 60%);z-index:-1;}
+.up-badge{display:inline-block;background:var(--og);color:#fff;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.up-h{font-family:var(--fh);font-weight:900;font-size:26px;line-height:1.1;margin-bottom:10px;}
+.up-price{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
+.up-price-val{font-family:var(--fh);font-weight:900;font-size:48px;color:var(--og);line-height:1;}
+.up-price-old{font-size:16px;color:var(--g2);text-decoration:line-through;}
+.up-perks{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.up-perk{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--g1);line-height:1.5;}
+.up-perk::before{content:'✓';color:var(--og);font-weight:700;flex-shrink:0;margin-top:1px;}
+.countdown-wrap{display:flex;gap:8px;justify-content:center;margin:14px 0;}
+.cd-block{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;min-width:58px;}
+.cd-num{font-family:var(--fh);font-weight:900;font-size:28px;line-height:1;}
+.cd-lbl{font-size:9px;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;}
+.social-proof{display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,.025);border-radius:8px;font-size:13px;color:var(--g1);}
+.sp-faces{display:flex;}
+.sp-face{width:26px;height:26px;border-radius:50%;background:var(--bg4);border:2px solid var(--bg2);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.sp-face:first-child{margin-left:0;}
+/* 7-day completion grid */
+.d7-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:12px 0;}
+.d7-item{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:8px;}
+.d7-item.done7{background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.25);}
+.d7-item.pending7{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
+.d7-item .di-d{font-size:8px;color:var(--g2);text-transform:uppercase;}
+.d7-item.done7 .di-d{color:var(--green);}
+.d7-item .di-i{font-size:16px;}
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="ld-rings"><div class="ld-r"></div><div class="ld-r"></div><div class="ld-r"></div>
+    <div class="ld-core"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="white" stroke-width="1.8"/><circle cx="9" cy="10" r="1.3" fill="white"/><circle cx="15" cy="10" r="1.3" fill="white"/><path d="M9 14.5Q12 17 15 14.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+  </div>
+  <div class="ld-brand">MODO SOBREVIVÊNCIA</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+<div id="app">
+
+<!-- WELCOME -->
+<section class="screen" id="screen-welcome">
+  <div class="wl-glow"></div>
+  <div class="wl-top">
+    <div class="wl-logo">
+      <div class="wl-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="white" stroke-width="1.8"/><circle cx="9" cy="10" r="1.3" fill="white"/><circle cx="15" cy="10" r="1.3" fill="white"/><path d="M9 14.5Q12 17 15 14.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <span class="wl-brand">MODO SOBREVIVÊNCIA</span>
+    </div>
+    <div class="wl-eyebrow">Protocolo Comportamental Masculino</div>
+    <h1 class="wl-h1">SEU CORPO<br>NÃO É O<br><em>PROBLEMA.</em></h1>
+    <p class="wl-sub">O estresse crônico ativou o Modo Sobrevivência — um sistema que faz seu corpo acumular gordura e buscar comida como válvula de escape. Em 7 dias, você vai desligar esse sistema.</p>
+  </div>
+  <div class="wl-bottom">
+    <div class="wl-stats">
+      <div class="wl-stat"><div class="wl-stat-val">7</div><div class="wl-stat-lbl">Dias</div></div>
+      <div class="wl-stat"><div class="wl-stat-val">15'</div><div class="wl-stat-lbl">Por dia</div></div>
+      <div class="wl-stat"><div class="wl-stat-val">3</div><div class="wl-stat-lbl">Perfis</div></div>
+    </div>
+    <button class="btn btn-og btn-pulse" onclick="showScreen('quiz')">FAZER MEU DIAGNÓSTICO GRÁTIS <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--g2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z"/></svg>100% gratuito · 2 minutos · resultado imediato</div>
+  </div>
+</section>
+
+<!-- QUIZ (JS rendered) -->
+<section class="screen" id="screen-quiz">
+  <div class="quiz-header">
+    <div class="quiz-prog-row">
+      <span class="quiz-step" id="qStep">Pergunta 1 de 8</span>
+      <div class="qpbar"><div class="qpfill" id="qFill" style="width:12%"></div></div>
+    </div>
+  </div>
+  <div class="quiz-q" id="qText"></div>
+  <div class="quiz-opts" id="qOpts"></div>
+  <div class="quiz-nav">
+    <button class="btn btn-og btn-next" id="btnNext" onclick="nextQ()">CONTINUAR <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+  </div>
+</section>
+
+<!-- PROCESSING -->
+<section class="screen" id="screen-proc">
+  <div class="proc-glow"></div>
+  <div class="proc-brain">
+    <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+      <defs><radialGradient id="pbg" cx="50%" cy="50%"><stop offset="0%" stop-color="#FF6B00" stop-opacity=".18"/><stop offset="100%" stop-color="#FF6B00" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="70" cy="70" r="65" fill="url(#pbg)"/>
+      <circle cx="70" cy="70" r="55" stroke="rgba(255,107,0,.1)" stroke-width="1" stroke-dasharray="6 4"/>
+      <circle cx="70" cy="70" r="40" stroke="rgba(255,107,0,.18)" stroke-width="1"/>
+      <!-- Brain scan lines -->
+      <line x1="15" y1="70" x2="125" y2="70" stroke="rgba(255,107,0,.25)" stroke-width="1" stroke-dasharray="3 3">
+        <animateTransform attributeName="transform" type="translate" values="0,-30;0,30;0,-30" dur="2s" repeatCount="indefinite"/>
+      </line>
+      <path d="M45,55 C42,45 32,47 30,57 C24,54 20,62 22,68 C18,71 17,80 23,84 C21,92 27,97 35,95 C38,102 47,105 53,99 C57,105 68,105 71,97 C79,103 86,97 87,88 C93,91 97,84 94,77 C99,73 99,63 92,60 C95,51 87,44 79,47 C75,40 62,38 57,45 C53,40 46,40 45,55 Z" stroke="#FF6B00" stroke-width="1.5" opacity=".7"/>
+      <!-- Neural dots -->
+      <circle cx="50" cy="62" r="3" fill="#FF6B00" opacity=".8"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="72" cy="58" r="2.5" fill="#FF6B00" opacity=".6"><animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.3s" repeatCount="indefinite"/></circle>
+      <circle cx="86" cy="70" r="3" fill="#FF6B00" opacity=".7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.5s" repeatCount="indefinite"/></circle>
+      <circle cx="60" cy="82" r="2" fill="#FF6B00" opacity=".5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.8s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
+  <div class="proc-msg" id="procMsg">Analisando seu padrão...</div>
+  <div class="proc-sub" id="procSub">Identificando os gatilhos específicos do seu perfil comportamental</div>
+  <div class="proc-bar-wrap"><div class="proc-bar-fill" id="procBar"></div></div>
+</section>
+
+<!-- REPORT -->
+<section class="screen" id="screen-report">
+  <div class="rep-hero">
+    <div class="rep-eyebrow">Diagnóstico concluído — seu perfil</div>
+    <div class="rep-badge">
+      <div class="rep-badge-icon og" id="repIcon">⚡</div>
+      <div>
+        <div class="rep-profile-type">MODO SOBREVIVÊNCIA ATIVO</div>
+        <div class="rep-profile-name" id="repName">Executor Sobrecarregado</div>
+      </div>
+    </div>
+    <p class="rep-sub" id="repDesc">Seu cérebro aprendeu a usar a comida como válvula de alívio depois de dias de alta pressão. O Modo Sobrevivência está ativo principalmente no período noturno, quando o controle executivo cai.</p>
+  </div>
+  <div class="rep-body">
+    <div class="rep-card">
+      <div class="rep-card-title">Gatilhos identificados no seu perfil</div>
+      <div class="trig-chips" id="repTrigs"></div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-card-title">Índice Modo Sobrevivência</div>
+      <div class="rep-meter">
+        <div class="rep-meter-row"><span class="rep-meter-label">Modo Sobrevivência ativo</span><span class="rep-meter-val" style="color:var(--red)" id="msVal">87%</span></div>
+        <div class="rep-meter-bar"><div class="rep-meter-fill fill-red" id="msFill" style="width:0"></div></div>
+      </div>
+      <div class="rep-meter">
+        <div class="rep-meter-row"><span class="rep-meter-label">Controle alimentar consciente</span><span class="rep-meter-val" style="color:var(--og)">13%</span></div>
+        <div class="rep-meter-bar"><div class="rep-meter-fill fill-og" id="caFill" style="width:0"></div></div>
+      </div>
+      <div class="rep-meter">
+        <div class="rep-meter-row"><span class="rep-meter-label">Projeção após 7 dias</span><span class="rep-meter-val" style="color:var(--green)">23%</span></div>
+        <div class="rep-meter-bar"><div class="rep-meter-fill fill-grn" id="prFill" style="width:0"></div></div>
+      </div>
+    </div>
+    <div class="rep-card" style="border-color:rgba(255,107,0,.2);background:rgba(255,107,0,.04)">
+      <div class="rep-card-title">O que o Protocolo 7 Dias faz</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:12px;font-size:14px;color:var(--g1)"><span style="color:var(--og);font-weight:700;flex-shrink:0">01</span>Identifica e nomeia os gatilhos emocionais específicos do seu padrão</div>
+        <div style="display:flex;gap:12px;font-size:14px;color:var(--g1)"><span style="color:var(--og);font-weight:700;flex-shrink:0">02</span>Instala um mecanismo de interrupção antes do comportamento automático</div>
+        <div style="display:flex;gap:12px;font-size:14px;color:var(--g1)"><span style="color:var(--og);font-weight:700;flex-shrink:0">03</span>Substitui a comida como único amortecedor emocional disponível</div>
+      </div>
+    </div>
+    <div style="padding:0 0 8px">
+      <input id="nameInput" type="text" placeholder="Seu nome antes de começar..." style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 18px;font-size:18px;color:var(--white);width:100%;outline:none;margin-bottom:14px;transition:border-color .2s" oninput="checkRepName()" onfocus="this.style.borderColor='var(--og)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+      <button class="btn btn-og" id="btnStart" style="opacity:.28;pointer-events:none" onclick="startProtocol()">QUERO O PROTOCOLO 7 DIAS — R$37 <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+      <button class="btn btn-ghost" style="margin-top:10px;font-size:13px" onclick="acessarProtocolo()">Já comprei — acessar o protocolo</button>
+    </div>
+  </div>
+</section>
+
+<!-- DAY SCREENS (JS generated) -->
+</div>
+<div id="nav7"></div>
+<script>
+'use strict';
+const KEY7='ms7v1';
+let S={done:[],profile:null,name:'',screen:'welcome',answers:[]};
+const save=()=>{try{localStorage.setItem(KEY7,JSON.stringify(S));}catch(e){}};
+const load=()=>{try{const r=JSON.parse(localStorage.getItem(KEY7));if(r&&r.name){S={...S,...r};return true;}}catch(e){}return false;};
+
+/* QUIZ */
+const QS=[
+  {q:'Quando você mais perde o controle com a alimentação?',opts:['Final do dia, depois do trabalho','Tarde da noite, na frente da TV ou celular','Quando estou sob pressão ou prazo no trabalho','Nos fins de semana, sem rotina']},
+  {q:'O que geralmente dispara o impulso de comer fora de hora?',opts:['Estresse e pressão acumulada','Ansiedade, preocupação ou nervosismo','Tédio, falta de estímulo ou solidão','Conflito ou tensão com alguém próximo']},
+  {q:'Como você se sente logo depois de um episódio de comer compulsivo?',opts:['Culpa intensa e vergonha','Frustração e raiva de mim mesmo','Indiferença — já desisti de tentar','Determinação de compensar depois']},
+  {q:'Qual palavra descreve melhor como você se sente no trabalho ou nos seus compromissos?',opts:['Sobrecarregado e sem tempo para nada','Frustrado e pouco reconhecido','Entediado, desmotivado ou estagnado','Ansioso com medo de errar ou decepcionar']},
+  {q:'Quantas horas você dorme em média por noite?',opts:['Menos de 6 horas','Entre 6 e 7 horas','Entre 7 e 8 horas','Mais de 8 horas (mas acordo cansado)']},
+  {q:'Se você fosse descrever sua relação com a comida em uma frase...',opts:['"Como para relaxar depois de um dia pesado"','"Como quando me sinto só ou entediado"','"Como para me punir ou me recompensar"','"Nem sei mais por que como — é automático"']},
+  {q:'O que você já tentou para mudar esse padrão?',opts:['Dietas restritivas (low carb, corte de calorias)','Exercícios físicos intensos','Apps, contagem e controle rigoroso','Já tentei tudo — nada durou mais de 3 meses']},
+  {q:'Você está disposto a dedicar 15 minutos por dia para reprogramar esse padrão?',opts:['Sim, estou totalmente comprometido','Sim, mas com dúvida se vai funcionar para mim','Talvez, preciso ver como funciona','Estou aqui, mas cético — já fui enganado antes']},
+];
+
+/* PROFILES */
+const PROFILES={
+  executor:{name:'Executor Sobrecarregado',icon:'⚡',iconCls:'og',
+    desc:'Seu cérebro aprendeu a usar a comida como válvula de alívio depois de dias de alta pressão. O Modo Sobrevivência está ativo principalmente no período noturno, quando o controle executivo cai e o sistema límbico assume.',
+    trigs:['Pressão do trabalho','Final do dia','Falta de controle'],ms:87},
+  compensador:{name:'Compensador Noturno',icon:'🌙',iconCls:'bl',
+    desc:'Você usa a comida para preencher um vazio emocional — solidão, ansiedade acumulada ou a sensação de que precisa de uma recompensa após um dia difícil. O padrão é mais forte quando você está sozinho à noite.',
+    trigs:['Solidão noturna','Ansiedade acumulada','Recompensa emocional'],ms:84},
+  guerreiro:{name:'Guerreiro Travado',icon:'🔒',iconCls:'rd',
+    desc:'Você carrega raiva, frustração ou tensão reprimida que não tem saída. A comida vira o único amortecedor disponível para emoções que não podem ser expressas no contexto do trabalho ou família.',
+    trigs:['Raiva suprimida','Tensão sem saída','Sensação de estagnação'],ms:91},
+};
+
+/* SCORING */
+function calcProfile(){
+  const a=S.answers;
+  let exec=0,comp=0,guer=0;
+  if(a[0]===0)exec+=2; if(a[0]===1)comp+=2; if(a[0]===2||a[0]===3)guer+=1;
+  if(a[1]===0)exec+=2; if(a[1]===1||a[1]===2)comp+=2; if(a[1]===3)guer+=2;
+  if(a[3]===0)exec+=1; if(a[3]===1||a[3]===3)comp+=1; if(a[3]===2)guer+=2;
+  if(a[5]===0)exec+=1; if(a[5]===1)comp+=2; if(a[5]===2||a[5]===3)guer+=1;
+  if(exec>=comp&&exec>=guer)return'executor';
+  if(comp>=exec&&comp>=guer)return'compensador';
+  return'guerreiro';
+}
+
+/* QUIZ STATE */
+let curQ=0, curSel=-1;
+function renderQ(){
+  const q=QS[curQ];
+  document.getElementById('qStep').textContent=`Pergunta ${curQ+1} de ${QS.length}`;
+  document.getElementById('qFill').style.width=((curQ+1)/QS.length*100)+'%';
+  document.getElementById('qText').textContent=q.q;
+  const opts=document.getElementById('qOpts');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='qopt';d.innerHTML=`<div class="qopt-dot"><span class="qopt-check">✓</span></div><div class="qopt-text">${o}</div><div class="qopt-shine"></div>`;
+    d.onclick=()=>selectQ(i,d,opts);
+    opts.appendChild(d);
+  });
+  curSel=-1;
+  document.getElementById('btnNext').classList.remove('on');
+}
+function selectQ(i,el,parent){
+  parent.querySelectorAll('.qopt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');curSel=i;
+  document.getElementById('btnNext').classList.add('on');
+}
+function nextQ(){
+  if(curSel<0)return;
+  S.answers[curQ]=curSel;save();
+  curQ++;
+  if(curQ>=QS.length){showProc();return;}
+  renderQ();
+}
+
+/* PROCESSING */
+function showProc(){if(typeof msLead==='function')msLead({});
+  showScreen('proc');
+  const msgs=['Analisando seu padrão...','Identificando gatilhos emocionais...','Calculando índice de ativação...','Gerando seu protocolo personalizado...'];
+  const bar=document.getElementById('procBar');
+  const msg=document.getElementById('procMsg');
+  const sub=document.getElementById('procSub');
+  let step=0;
+  const subs=['Cruzando respostas com banco de padrões masculinos','Mapeando o perfil de ativação do Modo Sobrevivência','Calculando o índice de controle alimentar consciente','Preparando os 7 dias do seu protocolo'];
+  const iv=setInterval(()=>{
+    step++;bar.style.width=(step/msgs.length*100)+'%';
+    if(msgs[step-1])msg.textContent=msgs[step-1];
+    if(subs[step-1])sub.textContent=subs[step-1];
+    if(step>=msgs.length){clearInterval(iv);setTimeout(showReport,800);}
+  },700);
+}
+
+/* REPORT */
+function showReport(){if(typeof msViewContent==='function')msViewContent('7dias');
+  S.profile=calcProfile();save();
+  const p=PROFILES[S.profile];
+  document.getElementById('repIcon').textContent=p.icon;
+  document.getElementById('repIcon').className='rep-badge-icon '+p.iconCls;
+  document.getElementById('repName').textContent=p.name;
+  document.getElementById('repDesc').textContent=p.desc;
+  const tc=document.getElementById('repTrigs');tc.innerHTML='';
+  p.trigs.forEach(t=>{const s=document.createElement('div');s.className='trig-chip';s.textContent=t;tc.appendChild(s);});
+  document.getElementById('msVal').textContent=p.ms+'%';
+  showScreen('report');
+  setTimeout(()=>{
+    document.getElementById('msFill').style.width=p.ms+'%';
+    document.getElementById('caFill').style.width='13%';
+    document.getElementById('prFill').style.width='23%';
+  },400);
+}
+function checkRepName(){
+  const v=document.getElementById('nameInput').value.trim();
+  const btn=document.getElementById('btnStart');
+  btn.style.opacity=v.length>0?'1':'0.28';
+  btn.style.pointerEvents=v.length>0?'all':'none';
+}
+function acessarProtocolo(){
+  authOpen();
+}
+function startProtocol(){
+  const n=document.getElementById('nameInput').value.trim();if(!n)return;
+  S.name=n;save();
+  if(typeof msInitiateCheckout==='function')msInitiateCheckout('7dias');
+  window.location.href='https://pay.hotmart.com/M106019427D';
+}
+
+/* DAY CONTENT */
+const DAYS7={
+  1:{title:['MAPEAMENTO','DE GATILHO'],
+    read:{h:'O primeiro passo: nomear o inimigo',b:['O cérebro humano não consegue combater o que não consegue identificar. Quando você age por impulso alimentar, o sistema límbico está no comando — tomando decisões em milissegundos, antes que o córtex pré-frontal (a parte racional) consiga intervir. Para quebrar esse loop, você precisa primeiro nomear com precisão o que está acontecendo.','Pesquisa da UCLA mostrou que nomear uma emoção com uma palavra específica reduz sua ativação neural em 30-40%. Isso não é metáfora — é neuroimagem. O ato de nomear literalmente transfere o controle do sistema límbico para o córtex. É por isso que o Dia 1 não é sobre comida. É sobre identificação.','Selecione abaixo os gatilhos que você reconhece no seu padrão. Quanto mais honesto, mais efetivo o protocolo.']},
+    tech:{h:'Mapa de Gatilhos Pessoais',s:['Observe os gatilhos no mapa abaixo e selecione os que se aplicam à sua realidade — não os que você acha que deveria ter.','Para cada gatilho selecionado, observe o padrão: em qual horário ele aparece? O que vem antes dele?','Memorize os seus 2-3 principais. Nas próximas semanas, quando sentir o impulso, você vai perguntar: "Qual dos meus gatilhos está ativo agora?"','Nomear o gatilho antes de agir é o ato mais poderoso que existe no protocolo inteiro.']},
+    chal:'Identifique hoje o momento exato em que o impulso alimentar apareceu. Qual dos seus gatilhos estava presente? Apenas observe — ainda não precisa mudar nada.',
+    inter:'trig-map'},
+  2:{title:['RESPIRAÇÃO','DE RESET'],
+    read:{h:'A técnica que interrompe o loop em 14 segundos',b:['O Modo Sobrevivência é ativado pelo sistema nervoso simpático — a resposta de luta ou fuga. Quando esse sistema está ativo, o cortisol sobe, a digestão para, e o cérebro busca energia rápida — geralmente açúcar e gordura. A boa notícia: existe uma via neurológica direta para desligar o simpático e ativar o parassimpático, e ela passa pela respiração.','O padrão 4-4-6 (inspirar 4s, segurar 4s, expirar 6s) foi validado em estudos com militares e atletas de elite como um dos mecanismos mais eficientes de regulação autonômica disponíveis sem equipamento. A expiração prolongada ativa o nervo vago, que desacelera o coração e baixa o cortisol em minutos.','Você vai usar essa técnica ANTES de ceder ao impulso. Não durante, não depois — antes. Esses 14 segundos são a diferença entre uma escolha consciente e um comportamento automático.']},
+    tech:{h:'Respiração 4-4-6 — Ciclo completo',s:['Quando sentir o impulso: pare tudo que está fazendo. Sente ou fique de pé — postura ereta facilita a respiração profunda.','Inspire pelo nariz durante 4 segundos, enchendo o abdômen (não o peito).','Segure o ar completamente por 4 segundos. Sem tensão — apenas pausar.','Expire lentamente pela boca durante 6 segundos, completamente.','Repita o ciclo 3 vezes. Total: 42 segundos. Use o exercício interativo abaixo.']},
+    chal:'Fazer o exercício abaixo completo (3 ciclos) hoje. Depois, usar a técnica no próximo momento em que sentir o impulso de comer fora de hora.',
+    inter:'breath'},
+  3:{title:['RECOMPENSAS','ALTERNATIVAS'],
+    read:{h:'Por que "só ter força de vontade" não funciona',b:['A comida funciona como recompensa porque ativa o sistema dopaminérgico — liberando dopamina em segundos. Para que qualquer substituto funcione, ele precisa competir no mesmo mercado neurológico. Você não vai substituir algo que gera prazer com nada — precisa substituir com outro prazer. Força de vontade não é moeda nesse mercado.','O problema da maioria das abordagens é pedir que as pessoas simplesmente "resistam". Resistência consome glicose cerebral e força de vontade, e ambas se esgotam ao longo do dia. É por isso que o impulso é sempre mais forte à noite — depois de horas resistindo a outras coisas.','Hoje você vai construir seu menu pessoal de recompensas alternativas. A ideia não é encontrar algo que seja "saudável" — é encontrar algo que genuinamente ative prazer para você. Coisas que você deixou de fazer porque "não tem tempo" são candidatas perfeitas.']},
+    tech:{h:'Construindo seu Menu de Recompensas',s:['Selecione as opções abaixo que genuinamente funcionam para você como fonte de prazer ou alívio.','Adicione opções personalizadas — coisas que você especificamente gosta e que não envolvem comida.','Seu menu deve ter pelo menos 5 itens. Quanto mais, mais fácil substituir em diferentes contextos.','Na próxima vez que o impulso aparecer: abra mentalmente esse menu e escolha uma opção. Não tente resistir — substitua.']},
+    chal:'Construir seu menu com pelo menos 5 opções abaixo. Implementar uma substituição real hoje — não apenas planejar.',
+    inter:'rew-builder'},
+  4:{title:['DESCARGA','DE TENSÃO'],
+    read:{h:'O que fazer com a tensão que a comida estava absorvendo',b:['Agora que você tem ferramentas para identificar o gatilho (Dia 1), interromper o loop (Dia 2) e redirecionar para um substituto (Dia 3), surge a pergunta real: mas e a tensão que estava ali? Ela não desaparece quando você respira. Ela precisa de uma saída.','Tensão muscular é tensão emocional armazenada no corpo. Isso não é metáfora — é fisiologia. O sistema nervoso instala o estresse como contração muscular crônica, especialmente no pescoço, ombros, mandíbula e abdômen. A comida amolecia essa tensão temporariamente via dopamina. Sem comida, você precisa de descarga física real.','O protocolo de descarga de hoje é simples: 10 minutos de movimento intenso o suficiente para elevar o coração. Não precisa ser academia. Não precisa ser "treino". Precisa ser movimento que coloca tensão física no corpo — o único amortecedor que não cria um novo problema.']},
+    tech:{h:'Mapeie sua tensão — depois descarregue',s:['Use o mapa abaixo para identificar onde você sente mais tensão física agora.','Após mapear: escolha uma descarga de 10 minutos — caminhar rápido, agachamento livre, pular corda, fazer flexões até a exaustão, pedalar.','Durante a descarga: não coloque fone. Deixe a mente vagar. A atenção dispersa durante movimento físico é um dos melhores processadores emocionais disponíveis.','Após 10 minutos: avalie a tensão nos mesmos pontos. Ela caiu? Isso é o mecanismo funcionando.']},
+    chal:'Identificar os pontos de tensão no mapa abaixo e fazer 10 minutos de descarga física hoje — sem pular.',
+    inter:'body-map'},
+  5:{title:['PROTOCOLO','NOTURNO'],
+    read:{h:'Os 3 passos para não perder o controle à noite',b:['O período entre 20h e 23h é o horário de maior risco para 84% dos homens com padrão de alimentação emocional. Nesse horário: o controle executivo está exausto após um dia de decisões, o cortisol ainda está elevado se o dia foi pesado, e o ambiente (sofá, tela, silêncio) é exatamente o gatilho condicionado.','Você não vai "resolver" o período noturno com força de vontade — a força de vontade já acabou. Você vai criar uma estrutura que reduz a demanda por força de vontade. Protocolo é estrutura. Estrutura é proteção.','Os 3 passos do Protocolo Noturno não proíbem nada. Eles criam um ritual que ocupa os 45 minutos de maior risco com algo que não é comida e que tem efeito positivo sobre o estado emocional.']},
+    tech:{h:'Protocolo Noturno — 3 passos em 45 min',s:['<strong>Passo 1 — Descarga (15 min):</strong> Usar a técnica de descarga do Dia 4. Mesmo que seja 15 min de caminhada. Isso desce o cortisol antes do pico noturno.',
+    '<strong>Passo 2 — Reset (10 min):</strong> 2 ciclos da respiração 4-4-6 + 5 minutos de leitura ou música — sem tela, sem trabalho, sem notificação.',
+    '<strong>Passo 3 — Intenção (5 min):</strong> Escrever ou pensar em 1 coisa que foi bem hoje + 1 coisa que você vai fazer diferente amanhã. O cérebro que encerra o dia com intenção tem cortisol 18% menor na manhã seguinte.']},
+    chal:'Implementar o Protocolo Noturno esta noite. Marcar cada passo abaixo conforme concluir.',
+    inter:'night-proto'},
+  6:{title:['AFIRMAÇÃO','DE IDENTIDADE'],
+    read:{h:'A reprogramação começa pela identidade, não pelo comportamento',b:['Todo comportamento é precedido por uma identidade. Você não age diferente e depois passa a se ver diferente — você começa a se ver diferente, e o comportamento segue. É por isso que a maioria das dietas falha: elas tentam mudar o comportamento sem tocar na identidade. A identidade fica a mesma, e o comportamento sempre retorna ao padrão da identidade.','James Clear, em Atomic Habits, documenta que a mudança duradoura começa com "eu sou", não com "eu vou". "Eu vou comer menos à noite" é uma meta. "Sou um homem que não usa comida como válvula de escape" é uma identidade — e identidades são muito mais resistentes a recaídas.','"Afirmação de identidade" não é autoajuda. É reprogramação do sistema de autopercepção — que por sua vez modifica os comportamentos que você considera consistentes com quem você é. Hoje você escolhe a identidade que quer solidificar.']},
+    tech:{h:'Construindo sua afirmação de identidade',s:['Selecione abaixo a afirmação que mais ressoa com quem você quer ser — não com quem você acha que já é.','Leia a afirmação escolhida em voz alta 3 vezes. Isso parece idiota — faça assim mesmo.','Durante o dia, quando sentir o impulso: relembre a afirmação. "Sou um homem que identifica o gatilho antes de agir." Isso não vai eliminar o impulso — vai criar um conflito entre o impulso e a identidade que você está construindo.','Amanhã, você vai usar essa afirmação no Dia 7 como ponto de partida para o cartão de compromisso.']},
+    chal:'Selecionar sua afirmação abaixo e repetir 3 vezes em voz alta. Usar ela mentalmente no próximo impulso que aparecer hoje.',
+    inter:'id-builder'},
+  7:{title:['DIA 7','REVISÃO + PRÓXIMO NÍVEL'],
+    read:{h:'7 dias. O sistema começou a mudar.',b:['Você chegou ao fim do Protocolo 7 Dias. Não é o fim da jornada — é o fim da fase de instalação. Nas últimas 7 sessões, você instalou 6 ferramentas neurológicas que não existiam antes: identificação de gatilho, interrupção de loop, substituição de recompensa, descarga de tensão, estrutura noturna, e âncora de identidade.','O Modo Sobrevivência não foi eliminado — ele é um sistema de sobrevivência do cérebro, vai existir sempre. O que mudou é que agora existe um protocolo paralelo que compete com ele. A primeira vez que você usou a respiração antes de ceder ao impulso foi uma vitória neurológica real — um novo caminho neural foi aberto.','O índice de Modo Sobrevivência que era 87% no início começou a cair. Para a maioria das pessoas, após 7 dias consistentes, está entre 60% e 70%. Para zerá-lo — ou aproximar de zero — são necessários mais 14 dias de protocolo aprofundado.']},
+    tech:{h:'Revisão dos seus 7 dias',s:['Observe a grade dos seus 7 dias abaixo. Cada dia concluído é uma vitória de instalação neural.','Identifique qual das 6 técnicas foi mais efetiva para você especificamente.','Pense em qual período do dia o protocolo teve mais impacto — e em qual ainda há resistência.','Essa informação é o ponto de entrada para o Protocolo 21 Dias de Consolidação.']},
+    chal:'Preencher a revisão dos 7 dias abaixo e tomar uma decisão consciente: consolidar o que começou, ou deixar o sistema antigo recuperar o controle nas próximas semanas.',
+    inter:'d7-review'}
+};
+
+/* BUILD DAYS */
+function buildDays(){
+  const app=document.getElementById('app');
+  Object.entries(DAYS7).forEach(([ds,d])=>{
+    const dn=parseInt(ds);
+    if(document.getElementById('screen-day-'+dn))return;
+    const isDone=S.done.includes(dn);
+    const pct=(dn/7)*100;
+    const padN=String(dn).padStart(2,'0');
+    const sh=d.read.b.map(p=>`<p>${p}</p>`).join('');
+    const st=d.tech.s.map(s=>`<li>${s}</li>`).join('');
+    const ihtml=buildInter(d.inter,dn);
+    const div=document.createElement('section');
+    div.className='screen';div.id='screen-day-'+dn;
+    div.innerHTML=`<div class="day-scr"><div class="day-hero"><div class="day-bgn">${padN}</div><div class="day-prog-row"><div class="day-lbl">DIA ${dn} DE 7</div><div class="dpbar"><div class="dpfill" style="width:${pct}%"></div></div></div><h2 class="day-h1">${d.title.join('<br>')}</h2></div><div class="day-body"><div class="cc"><span class="stag stag-pur">Leitura do dia</span><div class="cc-title">${d.read.h}</div><div class="cc-text">${sh}</div></div><div class="cc"><span class="stag stag-og">Técnica do dia</span><div class="cc-title">${d.tech.h}</div><ol class="steps">${st}</ol></div>${ihtml}<div class="cc"><span class="stag stag-grn">Desafio prático</span><div class="cc-title">Sua missão de hoje</div><div class="chal-inner"><p class="chal-text">${d.chal}</p></div></div></div><button class="btn-done${isDone?' done':''}" id="bd-${dn}" onclick="doneDay(${dn})">${isDone?`✓ DIA ${dn} CONCLUÍDO`:`CONCLUIR DIA ${dn}`}</button><div class="spacer"></div></div>`;
+    app.appendChild(div);
+  });
+}
+function rebuildDays(){Object.keys(DAYS7).forEach(d=>{const e=document.getElementById('screen-day-'+d);if(e)e.remove();});buildDays();}
+
+/* INTERACTIVE BUILDERS */
+const TRIGS=[{i:'💼',n:'Trabalho',d:'Pressão e prazo'},{i:'🌙',n:'Noturno',d:'Hora do relaxar'},{i:'😤',n:'Conflito',d:'Tensão com alguém'},{i:'😶',n:'Vazio',d:'Tédio e solidão'},{i:'😰',n:'Ansiedade',d:'Preocupação e medo'},{i:'🏃',n:'Exaustão',d:'Fim do dia pesado'},{i:'🎉',n:'Celebração',d:'Recompensa emocional'},{i:'😔',n:'Frustração',d:'Expectativa x realidade'}];
+const REWS=['Caminhada de 15 min','Música que você ama','Banho quente','Ligar para alguém','Ler por 10 min','Jogar algo no celular','Café ou chá com calma','Alongamento suave','Respiração 4-4-6','Fazer algo com as mãos'];
+const BZ=['Pescoço e ombros','Mandíbula e cabeça','Peito e coração','Estômago e abdômen','Lombares','Pernas e pés'];
+const ID_OPTS=['Sou um homem que identifica o gatilho antes de agir','Sou um homem que respira antes de reagir','Sou um homem que não usa comida como válvula de escape','Sou um homem que cuida do meu corpo com respeito, não com punição','Sou um homem que sente as emoções sem ser controlado por elas'];
+
+function buildInter(type,day){
+  if(!type)return'';
+  const w=(inner,stag,ttl)=>`<div class="cc" id="ic-${day}"><span class="stag ${stag}">Exercício Interativo</span><div class="cc-title">${ttl}</div>${inner}</div>`;
+
+  if(type==='trig-map') return w(`<div class="trig-grid">${TRIGS.map((t,i)=>`<div class="trig-card" id="tc-${i}" onclick="togTrig(${i})"><div class="trig-card-icon">${t.i}</div><div class="trig-card-name">${t.n}</div><div class="trig-card-desc">${t.d}</div></div>`).join('')}</div><div class="trig-result" id="trig-res">Selecione os gatilhos que você reconhece no seu padrão.</div>`,'stag-og','Mapa de Gatilhos — selecione os seus');
+
+  if(type==='breath') return w(`<div class="bwrap"><div class="bring"><svg width="136" height="136" viewBox="0 0 136 136"><circle class="b-bg" cx="68" cy="68" r="60"/><circle class="b-arc" id="barc" cx="68" cy="68" r="60"/></svg><div class="bcenter"><div class="b-num" id="bnum">4</div><div class="b-phase" id="bphase">inspire</div></div></div><p class="b-instr" id="binstr">Inspire pelo nariz lentamente</p><button class="b-btn" id="bbtn" onclick="toggleB()">INICIAR</button><div class="b-count" id="bcnt">Alvo: 3 ciclos completos</div></div>`,'stag-og','Respiração 4-4-6 — Timer Interativo');
+
+  if(type==='rew-builder') return w(`<div class="rew-chips">${REWS.map((r,i)=>`<span class="rew-chip" id="rc-${i}" onclick="togRew(${i},'${r}')">${r}</span>`).join('')}</div><div class="rew-input-row"><input class="rew-input" id="rewInput" placeholder="Adicionar sua recompensa..." onkeydown="if(event.key==='Enter')addRew()"><button class="rew-add-btn" onclick="addRew()">+ ADD</button></div><div class="rew-list" id="rewList"></div>`,'stag-og','Menu de Recompensas Alternativas — construa o seu');
+
+  if(type==='body-map') return w(`<div class="bodymap-wrap"><svg class="bodymap-svg" viewBox="0 0 80 160" fill="none"><circle cx="40" cy="16" r="14" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="40" y1="30" x2="40" y2="95" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="40" y1="42" x2="16" y2="72" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="40" y1="42" x2="64" y2="72" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="40" y1="95" x2="24" y2="148" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><line x1="40" y1="95" x2="56" y2="148" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><circle cx="40" cy="16" r="3" fill="rgba(255,107,0,.5)" id="bm-0" style="cursor:pointer" onclick="togBZ(0)"/><ellipse cx="40" cy="36" rx="14" ry="6" fill="rgba(255,107,0,.0)" id="bm-1" stroke="rgba(255,255,255,.2)" stroke-width="1" style="cursor:pointer" onclick="togBZ(1)"/><ellipse cx="40" cy="60" rx="12" ry="10" fill="rgba(255,107,0,.0)" id="bm-2" stroke="rgba(255,255,255,.2)" stroke-width="1" style="cursor:pointer" onclick="togBZ(2)"/><ellipse cx="40" cy="80" rx="11" ry="9" fill="rgba(255,107,0,.0)" id="bm-3" stroke="rgba(255,255,255,.2)" stroke-width="1" style="cursor:pointer" onclick="togBZ(3)"/><ellipse cx="40" cy="97" rx="9" ry="7" fill="rgba(255,107,0,.0)" id="bm-4" stroke="rgba(255,255,255,.2)" stroke-width="1" style="cursor:pointer" onclick="togBZ(4)"/><ellipse cx="38" cy="128" rx="7" ry="16" fill="rgba(255,107,0,.0)" id="bm-5" stroke="rgba(255,255,255,.2)" stroke-width="1" style="cursor:pointer" onclick="togBZ(5)"/></svg><div class="bodymap-zones">${BZ.map((z,i)=>`<div class="bz" id="bz-${i}" onclick="togBZ(${i})"><div class="bz-row"><span class="bz-icon">●</span><span>${z}</span></div></div>`).join('')}</div></div><div class="bodymap-result" id="bm-res">Toque no corpo ou nas zonas acima para identificar onde você carrega mais tensão.</div>`,'stag-og','Mapa de Tensão Corporal — onde você carrega mais?');
+
+  if(type==='night-proto') return w(`<div class="np-steps">${['🏃 Descarga física (10-15 min) — caminhada, agachamento, flexões','🌬️ 2 ciclos de respiração 4-4-6 + 5 min sem tela','📝 1 coisa que foi bem hoje + 1 intenção para amanhã'].map((s,i)=>`<div class="np-step" id="np-${i}" onclick="togNP(${i})"><div class="np-circle" id="npc-${i}">${i+1}</div><div class="np-step-text">${s}</div></div>`).join('')}</div>`,'stag-og','Protocolo Noturno — marque conforme concluir');
+
+  if(type==='id-builder') return w(`<div class="id-opts">${ID_OPTS.map((o,i)=>`<div class="id-opt" id="id-${i}" onclick="pickID(${i})">${o}</div>`).join('')}</div><div class="id-card" id="id-card"><div class="id-card-top">Minha afirmação de identidade</div><div class="id-card-text" id="id-text">Selecione uma afirmação acima</div></div>`,'stag-og','Afirmação de Identidade — escolha a sua');
+
+  if(type==='d7-review') return w(`<div class="rep-card" style="margin:8px 0 14px"><div class="rep-card-title">Seus 7 dias</div><div class="d7-grid">${[1,2,3,4,5,6,7].map(d=>`<div class="d7-item ${S.done.includes(d)?'done7':'pending7'}"><span class="di-d">D${d}</span><span class="di-i">${S.done.includes(d)?'✅':'⬜'}</span></div>`).join('')}</div></div><div class="up-card"><div class="up-badge">PRÓXIMO NÍVEL DESBLOQUEADO</div><h3 class="up-h">Protocolo 21 Dias<br>de Consolidação</h3><p style="font-size:13px;color:var(--g1);margin-bottom:14px">Você instalou as 6 ferramentas base. Agora é a consolidação profunda — regulação emocional, sono e alimentação intuitiva.</p><div class="up-price"><span class="up-price-val">R$97</span><span class="up-price-old">R$197</span></div><div class="up-perks"><div class="up-perk">Módulo 1: Regulação Emocional Profunda (dias 8–12)</div><div class="up-perk">Módulo 2: Sono e Recuperação — cortisol e testosterona (dias 13–17)</div><div class="up-perk">Módulo 3: Alimentação Intuitiva Masculina (dias 18–21)</div><div class="up-perk">Gráficos, exercícios interativos e roda emocional</div><div class="up-perk">Acesso vitalício + todas as atualizações</div></div><div class="countdown-wrap"><div class="cd-block"><div class="cd-num" id="cdH">23</div><div class="cd-lbl">horas</div></div><div class="cd-block"><div class="cd-num" id="cdM">47</div><div class="cd-lbl">min</div></div><div class="cd-block"><div class="cd-num" id="cdS">12</div><div class="cd-lbl">seg</div></div></div><button class="btn btn-og btn-pulse" onclick="if(typeof msInitiateCheckout==='function')msInitiateCheckout('21dias');window.location.href='https://pay.hotmart.com/U106019773B'">QUERO O PROTOCOLO 21 DIAS <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button><div class="social-proof" style="margin-top:12px"><div class="sp-faces"><div class="sp-face">👨</div><div class="sp-face">👨</div><div class="sp-face">👨</div><div class="sp-face">👨</div></div><span><strong style="color:var(--white)">847 homens</strong> já estão no Protocolo 21 Dias</span></div></div>`,'stag-og','Revisão + Próximo Nível');
+
+  return'';
+}
+
+/* INTERACTIVE LOGIC */
+let selTrigs=new Set();
+function togTrig(i){
+  const c=document.getElementById('tc-'+i);if(!c)return;
+  if(selTrigs.has(i)){selTrigs.delete(i);c.classList.remove('sel');}
+  else{selTrigs.add(i);c.classList.add('sel');}
+  const res=document.getElementById('trig-res');if(!res)return;
+  if(!selTrigs.size){res.textContent='Selecione os gatilhos que você reconhece no seu padrão.';return;}
+  const names=[...selTrigs].map(i=>TRIGS[i].n);
+  res.innerHTML=`<strong style="color:var(--og)">Seu padrão identificado:</strong> Seus principais gatilhos são ${names.join(', ')}. Esses são os momentos onde o Protocolo será mais testado — e onde a respiração do Dia 2 precisa entrar antes do comportamento automático.`;
+}
+
+let bRun=false,bTimer=null,bPhase=0,bCnt=4,bCycles=0;
+const bPhases=[{n:'inspire',d:4,i:'Inspire pelo nariz lentamente',c:'#FF6B00'},{n:'segure',d:4,i:'Segure o ar completamente',c:'#F39C12'},{n:'expire',d:6,i:'Solte pela boca devagar',c:'#6B8EFF'}];
+function toggleB(){
+  if(bRun){clearInterval(bTimer);bRun=false;document.getElementById('bbtn').textContent='CONTINUAR';}
+  else{bRun=true;document.getElementById('bbtn').textContent='PAUSAR';runB();}
+}
+function runB(){
+  if(!bCnt)bCnt=bPhases[bPhase].d;
+  bTimer=setInterval(()=>{
+    const p=bPhases[bPhase];
+    const arc=document.getElementById('barc');
+    if(arc){arc.style.strokeDashoffset=(400-(400*(p.d-bCnt+1)/p.d));arc.style.stroke=p.c;}
+    document.getElementById('bnum').textContent=bCnt;
+    document.getElementById('bphase').textContent=p.n;
+    document.getElementById('binstr').textContent=p.i;
+    bCnt--;
+    if(bCnt<0){bPhase=(bPhase+1)%3;bCnt=bPhases[bPhase].d;
+      if(bPhase===0){bCycles++;document.getElementById('bcnt').textContent=bCycles+' ciclo'+(bCycles!==1?'s':'')+' completo'+(bCycles!==1?'s':'');
+        if(bCycles>=3){clearInterval(bTimer);bRun=false;document.getElementById('bbtn').textContent='CONCLUÍDO ✓';}}}
+  },1000);
+}
+
+let selRews=new Set(),rewItems=[];
+function togRew(i,name){
+  const c=document.getElementById('rc-'+i);if(!c)return;
+  if(selRews.has(name)){selRews.delete(name);c.classList.remove('sel');}
+  else{selRews.add(name);c.classList.add('sel');}
+  renderRewList();
+}
+function addRew(){
+  const inp=document.getElementById('rewInput');if(!inp)return;
+  const v=inp.value.trim();if(!v)return;
+  selRews.add(v);inp.value='';renderRewList();
+}
+function renderRewList(){
+  const list=document.getElementById('rewList');if(!list)return;
+  list.innerHTML='';
+  [...selRews].forEach(r=>{const d=document.createElement('div');d.className='rew-item';d.textContent=r;list.appendChild(d);});
+}
+
+let selBZ=new Set();
+function togBZ(i){
+  const bz=document.getElementById('bz-'+i);const bm=document.getElementById('bm-'+i);
+  if(selBZ.has(i)){selBZ.delete(i);if(bz)bz.classList.remove('sel');if(bm){bm.style.fill='rgba(255,107,0,0)';}}
+  else{selBZ.add(i);if(bz)bz.classList.add('sel');if(bm){bm.style.fill='rgba(255,107,0,.35)';}}
+  const res=document.getElementById('bm-res');if(!res)return;
+  if(!selBZ.size){res.textContent='Toque no corpo ou nas zonas acima para identificar onde você carrega mais tensão.';return;}
+  const names=[...selBZ].map(i=>BZ[i]).join(', ');
+  res.innerHTML=`<strong style="color:var(--og)">Zonas de tensão:</strong> ${names}. Após o mapa, faça 10 minutos de movimento físico intenso. Sinta essas regiões soltar durante a descarga.`;
+}
+
+let selNP=new Set();
+function togNP(i){
+  const el=document.getElementById('np-'+i);const c=document.getElementById('npc-'+i);
+  if(selNP.has(i)){selNP.delete(i);if(el)el.classList.remove('chk');if(c){c.textContent=i+1;}}
+  else{selNP.add(i);if(el)el.classList.add('chk');if(c)c.textContent='✓';}
+}
+
+let curID=-1;
+function pickID(i){
+  document.querySelectorAll('.id-opt').forEach((o,j)=>{o.classList.toggle('sel',j===i);});
+  curID=i;
+  const card=document.getElementById('id-card');const txt=document.getElementById('id-text');
+  if(txt)txt.textContent=ID_OPTS[i];
+  if(card){card.style.opacity='0';setTimeout(()=>{card.style.transition='opacity .4s';card.style.opacity='1';},100);}
+}
+
+/* COUNTDOWN */
+function startCountdown(){
+  let h=23,m=47,s=12;
+  setInterval(()=>{
+    s--;if(s<0){s=59;m--;if(m<0){m=59;h--;if(h<0){h=0;m=0;s=0;}}}
+    const hEl=document.getElementById('cdH'),mEl=document.getElementById('cdM'),sEl=document.getElementById('cdS');
+    if(hEl)hEl.textContent=String(h).padStart(2,'0');
+    if(mEl)mEl.textContent=String(m).padStart(2,'0');
+    if(sEl)sEl.textContent=String(s).padStart(2,'0');
+  },1000);
+}
+
+/* COMPLETE DAY */
+function doneDay(n){
+  if(S.done.includes(n))return;
+  S.done.push(n);save();
+  const btn=document.getElementById('bd-'+n);
+  if(btn){btn.textContent='✓ DIA '+n+' CONCLUÍDO';btn.classList.add('done');}
+  setTimeout(()=>{rebuildDays();if(n<7)showScreen('day-'+(n+1));else showScreen('day-7');},700);
+}
+
+/* NAV */
+function renderNav(active){
+  const nav=document.getElementById('nav7');nav.innerHTML='';
+  const hb=document.createElement('button');
+  hb.className='nd'+(active==='report'?' cur':'');
+  hb.innerHTML='<span class="nn">📋</span><span class="nl">Perfil</span>';
+  hb.onclick=()=>showScreen('report');
+  nav.appendChild(hb);
+  for(let i=1;i<=7;i++){
+    const done=S.done.includes(i);
+    const isActive=active==='day-'+i;
+    const prevOk=i===1||S.done.includes(i-1);
+    let cls='nd';
+    if(isActive)cls+=' cur';
+    else if(done)cls+=' done-n';
+    else if(!prevOk)cls+=' lock-n';
+    const b=document.createElement('button');
+    b.className=cls;
+    b.innerHTML=`<span class="nn">${done?'✓':i}</span><span class="nl">D${i}</span>`;
+    b.onclick=()=>{if(prevOk||done)showScreen('day-'+i);};
+    nav.appendChild(b);
+  }
+}
+
+/* SCREEN MANAGEMENT */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('screen-'+id);if(!el)return;
+  el.classList.add('active');window.scrollTo(0,0);
+  S.screen=id;save();
+  const isDay=id.startsWith('day-');
+  const nav=document.getElementById('nav7');
+  nav.classList.toggle('show',isDay||id==='report');
+  if(isDay||id==='report')renderNav(id);
+  if(id==='day-7')setTimeout(startCountdown,500);
+  if(id==='quiz'){curQ=0;curSel=-1;renderQ();}
+}
+
+/* INIT */
+function init(){
+  const had=load();
+  if(had&&S.name&&S.profile){buildDays();const sc=S.screen&&S.screen!=='welcome'?S.screen:'day-1';showScreen(sc);}
+  else if(had&&S.profile&&!S.name){showScreen('report');}
+  else{showScreen('welcome');}
+  setTimeout(()=>{const l=document.getElementById('loader');l.classList.add('out');setTimeout(()=>l.remove(),550);},1100);
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+
+<!-- ============================================================
+  AUTENTICAÇÃO SUPABASE — Modal de verificação de email
+  ============================================================ -->
+<div id="auth-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9998;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#0F1117;border:1px solid rgba(255,107,0,.35);border-radius:16px;padding:36px 28px;max-width:400px;width:100%;text-align:center;box-shadow:0 0 60px rgba(255,107,0,.12);">
+    <div style="width:48px;height:48px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px;">🔒</div>
+    <h2 style="font-family:var(--fh);font-weight:900;font-size:22px;margin:0 0 8px;color:var(--white);">Acesse seu Protocolo</h2>
+    <p style="font-size:14px;color:var(--g1);margin:0 0 24px;line-height:1.6;">Digite o email que você usou na compra para liberar o acesso.</p>
+    <input id="auth-email" type="email" placeholder="seu@email.com" autocomplete="email"
+      style="width:100%;box-sizing:border-box;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--white);font-size:16px;font-family:var(--fb);outline:none;margin-bottom:10px;transition:border-color .2s;"
+      onfocus="this.style.borderColor='var(--og)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"
+      onkeydown="if(event.key==='Enter')authVerify()">
+    <div id="auth-msg" style="display:none;font-size:13px;margin-bottom:12px;line-height:1.5;padding:10px 14px;border-radius:8px;"></div>
+    <button id="auth-btn" onclick="authVerify()"
+      style="width:100%;padding:15px;background:var(--og);color:#fff;border:none;border-radius:10px;font-family:var(--fh);font-weight:700;font-size:17px;letter-spacing:.06em;cursor:pointer;transition:all .2s;margin-bottom:10px;">
+      VERIFICAR E ACESSAR
+    </button>
+    <button onclick="authClose()" style="background:none;border:none;color:var(--g2);font-size:13px;cursor:pointer;font-family:var(--fb);">Cancelar</button>
+  </div>
+</div>
+
+<script>
+function authOpen(){
+  var m=document.getElementById('auth-modal');
+  m.style.display='flex';
+  authClear();
+  setTimeout(function(){document.getElementById('auth-email').focus();},100);
+}
+function authClose(){
+  document.getElementById('auth-modal').style.display='none';
+  document.getElementById('auth-email').value='';
+  authClear();
+}
+function authMsg(txt,tipo){
+  var el=document.getElementById('auth-msg');
+  el.style.display='block';el.textContent=txt;
+  if(tipo==='erro'){el.style.background='rgba(231,76,60,.1)';el.style.color='#ff6b6b';el.style.border='1px solid rgba(231,76,60,.2)';}
+  else if(tipo==='ok'){el.style.background='rgba(46,204,113,.1)';el.style.color='#2ecc71';el.style.border='1px solid rgba(46,204,113,.2)';}
+  else{el.style.background='rgba(255,255,255,.04)';el.style.color='var(--g1)';el.style.border='1px solid rgba(255,255,255,.08)';}
+}
+function authClear(){
+  var el=document.getElementById('auth-msg');
+  el.style.display='none';el.textContent='';
+}
+document.getElementById('auth-modal').addEventListener('click',function(e){if(e.target===this)authClose();});
+
+async function authVerify(){
+  var emailInput=document.getElementById('auth-email');
+  var btn=document.getElementById('auth-btn');
+  var email=emailInput.value.trim().toLowerCase();
+  if(!email||!email.includes('@')||!email.includes('.')){authMsg('Digite um email válido.','erro');emailInput.focus();return;}
+  btn.disabled=true;btn.textContent='Verificando...';btn.style.opacity='.6';
+  authMsg('Consultando sua compra...','info');
+  try{
+    var res=await fetch('/api/verify-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})});
+    var data=await res.json();
+    if(data.authorized){
+      authMsg('✅ Compra confirmada! Carregando protocolo...','ok');
+      sessionStorage.setItem('ms_email',email);
+      sessionStorage.setItem('ms_product',data.product||'7dias');
+      sessionStorage.setItem('ms_auth','true');
+      setTimeout(function(){authClose();buildDays();showScreen('day-1');},1000);
+    } else {
+      authMsg('Email não encontrado. Verifique se usou o mesmo email da compra na Hotmart.','erro');
+      btn.disabled=false;btn.textContent='VERIFICAR E ACESSAR';btn.style.opacity='1';
+      emailInput.focus();
+    }
+  } catch(err){
+    console.error('[auth]',err);
+    authMsg('Erro de conexão. Tente novamente.','erro');
+    btn.disabled=false;btn.textContent='VERIFICAR E ACESSAR';btn.style.opacity='1';
+  }
+}
+</script>
+</body>
+</html>
