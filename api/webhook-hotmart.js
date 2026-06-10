@@ -36,7 +36,6 @@ function normalizePhone(phone) {
   return phone.replace(/\D/g, '');
 }
 
-// ─── SUPABASE ────────────────────────────────────────────────────────────────
 async function saveToSupabase(email, buyerName, productId, productName, transactionId) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -46,43 +45,37 @@ async function saveToSupabase(email, buyerName, productId, productName, transact
     return;
   }
 
-  try {
-    const response = await fetch(`${supabaseUrl}/rest/v1/purchases`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-        'Prefer': 'return=minimal',
-      },
-      body: JSON.stringify({
-        email: email.toLowerCase().trim(),
-        buyer_name: buyerName || null,
-        product_id: productId || null,
-        product_name: productName || 'unknown',
-        hotmart_transaction_id: transactionId || null,
-        status: 'approved',
-        purchased_at: new Date().toISOString(),
-      }),
-    });
+  const response = await fetch(`${supabaseUrl}/rest/v1/purchases`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`,
+      'Prefer': 'return=minimal',
+    },
+    body: JSON.stringify({
+      email: email.toLowerCase().trim(),
+      buyer_name: buyerName || null,
+      product_id: productId || null,
+      product_name: productName || 'unknown',
+      hotmart_transaction_id: transactionId || null,
+      status: 'approved',
+      purchased_at: new Date().toISOString(),
+    }),
+  });
 
-    if (!response.ok) {
-      const err = await response.text();
-      console.error('[SUPABASE] Erro ao salvar:', err);
-    } else {
-      console.log(`[SUPABASE] ✅ Salvo: ${email} | ${productName}`);
-    }
-  } catch (err) {
-    console.error('[SUPABASE] Erro inesperado:', err.message);
+  if (!response.ok) {
+    const err = await response.text();
+    console.error('[SUPABASE] Erro ao salvar:', err);
+  } else {
+    console.log(`[SUPABASE] ✅ Salvo: ${email} | ${productName}`);
   }
 }
 
-// ─── MAIN HANDLER ────────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
-  // Responde imediatamente para evitar timeout da Hotmart
-  res.status(200).json({ received: true });
-
-  if (req.method !== 'POST') return;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
   try {
     const body = req.body || {};
@@ -91,14 +84,13 @@ module.exports = async function handler(req, res) {
     const event = body.event || body.data?.event;
     if (event !== 'PURCHASE_APPROVED' && event !== 'PURCHASE_COMPLETE') {
       console.log('[WEBHOOK SKIP]', event);
-      return;
+      return res.status(200).json({ received: true, skipped: true });
     }
 
     const buyer    = body.data?.buyer    || {};
     const purchase = body.data?.purchase || {};
     const prod     = body.data?.product  || {};
 
-    // Identifica produto — string do ID (ex: 'M106019427D')
     const productKey  = String(prod.id || prod.hottok || '');
     const productInfo = PRODUCTS[productKey] || {
       content_name: prod.name || 'Produto Modo Sobrevivência',
@@ -122,19 +114,19 @@ module.exports = async function handler(req, res) {
       console.error('[WEBHOOK] Email não encontrado no payload');
     }
 
-    // ── Dispara CAPI Meta ────────────────────────────────────────────────────
-    if (!PIXEL_ID || !ACCESS_TOKEN) {
-      console.log('[WEBHOOK] CAPI não configurado — pulando');
-      return;
-    }
+    // ── Responde OK para Hotmart ─────────────────────────────────────────────
+    res.status(200).json({ received: true });
+
+    // ── Dispara CAPI Meta (após responder) ───────────────────────────────────
+    if (!PIXEL_ID || !ACCESS_TOKEN) return;
 
     const userData = {
-      em:          email            ? sha256(email)                          : undefined,
-      ph:          buyer.phone      ? sha256(normalizePhone(buyer.phone))    : undefined,
-      fn:          buyer.name       ? sha256(buyer.name.split(' ')[0])       : undefined,
-      ln:          buyer.name       ? sha256(buyer.name.split(' ').slice(1).join(' ')) : undefined,
+      em:          email       ? sha256(email)                                    : undefined,
+      ph:          buyer.phone ? sha256(normalizePhone(buyer.phone))              : undefined,
+      fn:          buyer.name  ? sha256(buyer.name.split(' ')[0])                 : undefined,
+      ln:          buyer.name  ? sha256(buyer.name.split(' ').slice(1).join(' ')) : undefined,
       country:     sha256('br'),
-      external_id: email            ? sha256(email)                          : undefined,
+      external_id: email       ? sha256(email)                                    : undefined,
     };
 
     const customData = {
@@ -161,16 +153,17 @@ module.exports = async function handler(req, res) {
     if (DEBUG) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
 
     const url = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
-    const response = await fetch(url, {
+    const metaRes = await fetch(url, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload),
     });
 
-    const data = await response.json();
+    const data = await metaRes.json();
     console.log('[PURCHASE SENT]', data);
 
   } catch (err) {
     console.error('[WEBHOOK ERROR]', err.message);
+    if (!res.headersSent) res.status(200).json({ received: true });
   }
 };
