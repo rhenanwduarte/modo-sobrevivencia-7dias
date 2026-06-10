@@ -1,19 +1,48 @@
 /**
  * MODO SOBREVIVÊNCIA — Hotmart Webhook Handler
- * Recebe confirmação de compra da Hotmart e dispara Purchase via CAPI
- * + Salva email no Supabase para autenticação do protocolo
+ * Recebe confirmação de compra da Hotmart
+ * Salva email no Supabase + dispara Purchase via CAPI Meta
  */
 
 const crypto = require('crypto');
 
-// ─── SUPABASE ────────────────────────────────────────────────────────────────
+const PIXEL_ID     = process.env.META_PIXEL_ID;
+const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+const API_VERSION  = 'v19.0';
+const DEBUG        = process.env.DEBUG_MODE === 'true';
 
+const PRODUCTS = {
+  'M106019427D': {
+    content_name: 'Protocolo 7 Dias — Modo Sobrevivência',
+    content_ids:  ['protocolo-7dias'],
+    value:        37.00,
+    product_name: '7dias',
+  },
+  'U106019773B': {
+    content_name: 'Protocolo 21 Dias — Modo Sobrevivência',
+    content_ids:  ['protocolo-21dias'],
+    value:        97.00,
+    product_name: '21dias',
+  },
+};
+
+function sha256(value) {
+  if (!value) return undefined;
+  return crypto.createHash('sha256').update(String(value).toLowerCase().trim()).digest('hex');
+}
+
+function normalizePhone(phone) {
+  if (!phone) return undefined;
+  return phone.replace(/\D/g, '');
+}
+
+// ─── SUPABASE ────────────────────────────────────────────────────────────────
 async function saveToSupabase(email, buyerName, productId, productName, transactionId) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    console.error('[SUPABASE] Variáveis não configuradas — pulando salvamento');
+    console.error('[SUPABASE] Variáveis não configuradas');
     return;
   }
 
@@ -29,8 +58,8 @@ async function saveToSupabase(email, buyerName, productId, productName, transact
       body: JSON.stringify({
         email: email.toLowerCase().trim(),
         buyer_name: buyerName || null,
-        product_id: productId,
-        product_name: productName,
+        product_id: productId || null,
+        product_name: productName || 'unknown',
         hotmart_transaction_id: transactionId || null,
         status: 'approved',
         purchased_at: new Date().toISOString(),
@@ -48,34 +77,7 @@ async function saveToSupabase(email, buyerName, productId, productName, transact
   }
 }
 
-const PIXEL_ID     = process.env.META_PIXEL_ID;
-const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
-const API_VERSION  = 'v19.0';
-const DEBUG        = process.env.DEBUG_MODE === 'true';
-
-const PRODUCTS = {
-  'M106019427D': {
-    content_name: 'Protocolo 7 Dias — Modo Sobrevivência',
-    content_ids:  ['protocolo-7dias'],
-    value:        37.00,
-  },
-  'U106019773B': {
-    content_name: 'Protocolo 21 Dias — Modo Sobrevivência',
-    content_ids:  ['protocolo-21dias'],
-    value:        97.00,
-  },
-};
-
-function sha256(value) {
-  if (!value) return undefined;
-  return crypto.createHash('sha256').update(String(value).toLowerCase().trim()).digest('hex');
-}
-
-function normalizePhone(phone) {
-  if (!phone) return undefined;
-  return phone.replace(/\D/g, '');
-}
-
+// ─── MAIN HANDLER ────────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
   // Responde imediatamente para evitar timeout da Hotmart
   res.status(200).json({ received: true });
@@ -96,33 +98,43 @@ module.exports = async function handler(req, res) {
     const purchase = body.data?.purchase || {};
     const prod     = body.data?.product  || {};
 
-    const productKey  = prod.id || prod.hottok || '';
+    // Identifica produto — string do ID (ex: 'M106019427D')
+    const productKey  = String(prod.id || prod.hottok || '');
     const productInfo = PRODUCTS[productKey] || {
       content_name: prod.name || 'Produto Modo Sobrevivência',
       content_ids:  [productKey || 'modo-sobrevivencia'],
       value:        purchase.price?.value || 0,
+      product_name: 'unknown',
     };
-    const productName = productKey === 'M106019427D' ? '7dias' :
-                        productKey === 'U106019773B' ? '21dias' : 'unknown';
 
-    // ── Salva no Supabase (autenticação do protocolo) ────────────────────
-    if (buyer.email) {
+    const email = buyer.email || null;
+
+    // ── Salva no Supabase ────────────────────────────────────────────────────
+    if (email) {
       await saveToSupabase(
-        buyer.email,
+        email,
         buyer.name || null,
-        productKey,
-        productName,
+        productKey || null,
+        productInfo.product_name,
         purchase.transaction || null
       );
+    } else {
+      console.error('[WEBHOOK] Email não encontrado no payload');
+    }
+
+    // ── Dispara CAPI Meta ────────────────────────────────────────────────────
+    if (!PIXEL_ID || !ACCESS_TOKEN) {
+      console.log('[WEBHOOK] CAPI não configurado — pulando');
+      return;
     }
 
     const userData = {
-      em:          buyer.email ? sha256(buyer.email) : undefined,
-      ph:          buyer.phone ? sha256(normalizePhone(buyer.phone)) : undefined,
-      fn:          buyer.name  ? sha256(buyer.name.split(' ')[0]) : undefined,
-      ln:          buyer.name  ? sha256(buyer.name.split(' ').slice(1).join(' ')) : undefined,
+      em:          email            ? sha256(email)                          : undefined,
+      ph:          buyer.phone      ? sha256(normalizePhone(buyer.phone))    : undefined,
+      fn:          buyer.name       ? sha256(buyer.name.split(' ')[0])       : undefined,
+      ln:          buyer.name       ? sha256(buyer.name.split(' ').slice(1).join(' ')) : undefined,
       country:     sha256('br'),
-      external_id: buyer.email ? sha256(buyer.email) : undefined,
+      external_id: email            ? sha256(email)                          : undefined,
     };
 
     const customData = {
@@ -149,7 +161,6 @@ module.exports = async function handler(req, res) {
     if (DEBUG) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
 
     const url = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
-
     const response = await fetch(url, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
