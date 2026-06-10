@@ -1,11 +1,18 @@
 /**
- * MODO SOBREVIVÊNCIA — Verify Email Endpoint
- * Verifica se email tem compra aprovada no Supabase
- * Mantém a service_role key fora do frontend
+ * MODO SOBREVIVÊNCIA — Verify Email Endpoint v2
+ * Atende protocolo 7 dias e 21 dias
+ * CORS liberado para os dois domínios
  */
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.modosobrevivencia.online');
+  // CORS — aceita os dois domínios
+  const allowed = [
+    'https://www.modosobrevivencia.online',
+    'https://modosobrevivencia.online',
+    'https://21dias.modosobrevivencia.online'
+  ];
+  const origin = req.headers.origin || '';
+  res.setHeader('Access-Control-Allow-Origin', allowed.includes(origin) ? origin : allowed[0]);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -13,7 +20,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { email } = req.body || {};
+    const { email, product_id } = req.body || {};
 
     if (!email || !email.includes('@')) {
       return res.status(400).json({ authorized: false, error: 'Email inválido' });
@@ -28,7 +35,14 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ authorized: false, error: 'Erro de configuração' });
     }
 
-    const queryUrl = `${supabaseUrl}/rest/v1/purchases?email=eq.${encodeURIComponent(normalizedEmail)}&status=eq.approved&select=email,product_name,product_id,purchased_at&limit=1`;
+    // Se product_id enviado, filtra por produto específico
+    // 7 dias não envia product_id → aceita qualquer compra aprovada
+    // 21 dias envia product_id=U106019773B → exige compra do 21 dias
+    let queryUrl = `${supabaseUrl}/rest/v1/purchases?email=eq.${encodeURIComponent(normalizedEmail)}&status=eq.approved&select=email,product_name,product_id,purchased_at&limit=1`;
+
+    if (product_id) {
+      queryUrl = `${supabaseUrl}/rest/v1/purchases?email=eq.${encodeURIComponent(normalizedEmail)}&status=eq.approved&product_id=eq.${encodeURIComponent(product_id)}&select=email,product_name,product_id,purchased_at&limit=1`;
+    }
 
     const response = await fetch(queryUrl, {
       method: 'GET',
@@ -48,7 +62,7 @@ module.exports = async function handler(req, res) {
     const rows = await response.json();
 
     if (!rows || rows.length === 0) {
-      console.log(`[verify-email] ❌ Não encontrado: ${normalizedEmail}`);
+      console.log(`[verify-email] ❌ Não encontrado: ${normalizedEmail} | product: ${product_id||'any'}`);
       return res.status(200).json({ authorized: false });
     }
 
@@ -57,7 +71,7 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({
       authorized: true,
-      product: purchase.product_name,   // '7dias' ou '21dias'
+      product: purchase.product_name,
       product_id: purchase.product_id,
       purchased_at: purchase.purchased_at,
     });
