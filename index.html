@@ -104,8 +104,31 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
 .wl-stat-val{font-family:var(--fh);font-weight:900;font-size:24px;color:var(--white);line-height:1;}
 .wl-stat-lbl{font-size:10px;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
 /* QUIZ */
-#screen-quiz{display:none;flex-direction:column;min-height:100vh;}
+#screen-quiz{display:none;flex-direction:column;min-height:100vh;position:relative;overflow:hidden;}
 #screen-quiz.active{display:flex;animation:sci .36s var(--ease) forwards;}
+/* Ambient glow que muda por pergunta */
+.quiz-ambient{position:absolute;inset:0;pointer-events:none;z-index:0;transition:background 1s ease;}
+.quiz-content-wrap{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;}
+/* Barra temática por pergunta */
+.q-theme-bar{display:flex;align-items:center;gap:10px;padding:10px 24px 0;min-height:34px;}
+.q-theme-icon{font-size:20px;display:inline-block;animation:ticon .45s var(--spring) both;}
+@keyframes ticon{from{transform:scale(0) rotate(-20deg);}to{transform:scale(1) rotate(0deg);}}
+.q-theme-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--og);opacity:.8;animation:fadein .4s ease .1s both;}
+@keyframes fadein{from{opacity:0;}to{opacity:.8;}}
+/* Card de insight pós-seleção */
+.quiz-insight-card{margin:14px 24px 0;padding:16px 18px;background:linear-gradient(135deg,rgba(255,107,0,.07),rgba(255,107,0,.03));border:1px solid rgba(255,107,0,.25);border-radius:14px;animation:insightin .45s var(--ease) both;backdrop-filter:blur(6px);}
+@keyframes insightin{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.qi-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.qi-icon{font-size:15px;}
+.qi-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--og);}
+.qi-validation{font-family:var(--fh);font-weight:900;font-size:17px;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.qi-stat{font-size:12px;color:var(--og);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.qi-stat::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--og);flex-shrink:0;}
+.qi-science{font-size:11px;color:var(--g2);line-height:1.6;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);}
+/* Animação de entrada da pergunta */
+.quiz-q.q-enter{animation:qenter .38s var(--ease) both;}
+.quiz-opts.q-enter{animation:qenter .38s var(--ease) .05s both;}
+@keyframes qenter{from{opacity:0;transform:translateX(22px);}to{opacity:1;transform:translateX(0);}}
 .quiz-header{padding:24px 24px 0;display:flex;flex-direction:column;gap:14px;}
 .quiz-prog-row{display:flex;align-items:center;gap:12px;}
 .quiz-step{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--g2);white-space:nowrap;}
@@ -492,16 +515,40 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
 
 <!-- QUIZ (JS rendered) -->
 <section class="screen" id="screen-quiz">
-  <div class="quiz-header">
-    <div class="quiz-prog-row">
-      <span class="quiz-step" id="qStep">Pergunta 1 de 8</span>
-      <div class="qpbar"><div class="qpfill" id="qFill" style="width:12%"></div></div>
+  <!-- Glow ambiente por pergunta -->
+  <div class="quiz-ambient" id="quiz-ambient"></div>
+
+  <div class="quiz-content-wrap">
+    <div class="quiz-header">
+      <div class="quiz-prog-row">
+        <span class="quiz-step" id="qStep">Pergunta 1 de 8</span>
+        <div class="qpbar"><div class="qpfill" id="qFill" style="width:12%"></div></div>
+      </div>
     </div>
-  </div>
-  <div class="quiz-q" id="qText"></div>
-  <div class="quiz-opts" id="qOpts"></div>
-  <div class="quiz-nav">
-    <button class="btn btn-og btn-next" id="btnNext" onclick="nextQ()">CONTINUAR <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+
+    <!-- Barra temática — ícone + label contextual por pergunta -->
+    <div class="q-theme-bar">
+      <span id="q-theme-icon" class="q-theme-icon">🌙</span>
+      <span id="q-theme-label" class="q-theme-label">Momento de vulnerabilidade</span>
+    </div>
+
+    <div class="quiz-q" id="qText"></div>
+    <div class="quiz-opts" id="qOpts"></div>
+
+    <!-- Card de insight (aparece após seleção de resposta) -->
+    <div id="quiz-insight" class="quiz-insight-card" style="display:none;">
+      <div class="qi-header">
+        <span class="qi-icon">🧠</span>
+        <span class="qi-label">Padrão identificado</span>
+      </div>
+      <div class="qi-validation" id="qi-v"></div>
+      <div class="qi-stat" id="qi-s"></div>
+      <div class="qi-science" id="qi-c"></div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn btn-og btn-next" id="btnNext" onclick="nextQ()">CONTINUAR <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+    </div>
   </div>
 </section>
 
@@ -1063,6 +1110,152 @@ async function authVerify(){
 }
 </script>
 <script>
+/* ══════════════════════════════════════════════
+   QUIZ GAMIFICADO — dados e lógica de imersão
+   ══════════════════════════════════════════════ */
+
+/* Tema visual por pergunta: ícone + label + posição do glow */
+var QUIZ_THEMES=[
+  {icon:'🌙',label:'Momento de vulnerabilidade',gx:'72%',gy:'18%'},
+  {icon:'⚡',label:'Identificação do gatilho',gx:'28%',gy:'42%'},
+  {icon:'🔄',label:'Ciclo emocional',gx:'55%',gy:'65%'},
+  {icon:'💼',label:'Estressor primário',gx:'80%',gy:'25%'},
+  {icon:'😴',label:'Qualidade de recuperação',gx:'22%',gy:'55%'},
+  {icon:'🎭',label:'Padrão automatizado',gx:'60%',gy:'15%'},
+  {icon:'🔁',label:'Histórico de tentativas',gx:'40%',gy:'72%'},
+  {icon:'🎯',label:'Prontidão para mudança',gx:'50%',gy:'32%'},
+];
+
+/* Insights por pergunta × opção [validação, dado, ciência] */
+var QUIZ_INSIGHTS=[
+  /* Q1 — quando perde o controle */
+  [
+    {v:'Depleção executiva noturna identificada.',s:'67% dos perfis do protocolo marcaram essa opção.',c:'O córtex pré-frontal perde até 40% da capacidade de inibição após horas de trabalho — é neurologia, não fraqueza.'},
+    {v:'Padrão noturno de recompensa compensatória.',s:'Comportamento noturno é o gatilho mais mapeado no protocolo.',c:'O sistema dopaminérgico busca recompensa exatamente quando o controle executivo está no mínimo.'},
+    {v:'Resposta de estresse agudo identificada.',s:'Pressão e prazo elevam o cortisol — e o cortisol ativa o impulso.',c:'A resposta de luta-ou-fuga redireciona o cérebro para buscar energia de alto rendimento de forma automática.'},
+    {v:'Ausência de estrutura como gatilho principal.',s:'Fins de semana sem rotina amplificam o sistema de compensação.',c:'Estrutura comportamental reduz a demanda por força de vontade em até 60% — sem ela, o sistema antigo assume.'},
+  ],
+  /* Q2 — o que dispara o impulso */
+  [
+    {v:'Cortisol elevado como gatilho primário.',s:'Estresse está na raiz de 78% dos padrões identificados no protocolo.',c:'Cortisol cronicamente elevado aumenta o desejo por alimentos de alta densidade energética — resposta evoluída de sobrevivência.'},
+    {v:'Sistema nervoso em estado de alerta constante.',s:'Ansiedade crônica mantém o eixo HPA ativado por horas após o evento.',c:'O nervo vago desregulado amplifica o ciclo ansiedade-impulso em loop — e a respiração é a chave de interrupção.'},
+    {v:'Vazio dopaminérgico identificado.',s:'Tédio é subativação — o cérebro busca dopamina onde encontrar.',c:'Baixo estímulo ativa o modo de conservação do sistema nervoso, que recruta comportamentos de recompensa rápida.'},
+    {v:'Tensão interpessoal como detonador emocional.',s:'Conflito ativa o sistema límbico em milissegundos.',c:'Raiva e frustração não expressas viram impulso comportamental redirecionado — o cérebro precisa de uma saída.'},
+  ],
+  /* Q3 — como se sente depois */
+  [
+    {v:'Ciclo de reforço negativo identificado.',s:'Culpa pós-episódio é o sinal mais claro de que o Modo Sobrevivência está ativo.',c:'A autocrítica eleva o cortisol — que reinicia exatamente o ciclo que gerou o impulso original.'},
+    {v:'Frustração como combustível do loop.',s:'Raiva de si mesmo é o sistema límbico ainda no controle.',c:'O self-monitoring failure ativa o circuito de punição cerebral, que paradoxalmente aumenta a probabilidade de recaída.'},
+    {v:'Desengajamento do sistema de controle.',s:'Indiferença é o estágio mais avançado do padrão — e o mais reversível com protocolo.',c:'O córtex cingulado anterior perde sensibilidade após repetição excessiva do ciclo — mas isso é reversível.'},
+    {v:'Compensação planejada como mecanismo de defesa.',s:'Determinação de compensar reinicia o ciclo sem resolver a causa raiz.',c:'Comportamento compensatório não resolve o pico de cortisol subjacente — apenas adia a próxima ativação.'},
+  ],
+  /* Q4 — como se sente no trabalho */
+  [
+    {v:'Sobrecarga crônica como estado base identificado.',s:'Executivos sobrecarregados têm cortisol 34% maior no período noturno.',c:'Overload cognitivo esgota progressivamente os recursos de regulação emocional ao longo do dia.'},
+    {v:'Frustração acumulada sem saída identificada.',s:'Falta de reconhecimento ativa o sistema de ameaça social no cérebro.',c:'Desvalorização percebida eleva cortisol e adrenalina de forma crônica — mesmo sem eventos agudos.'},
+    {v:'Estagnação como estressor invisível.',s:'Tédio ocupacional é tão estressante quanto sobrecarga — só opera diferente.',c:'Subotimização de habilidades ativa o modo de conservação do sistema nervoso, gerando o mesmo ciclo de compensação.'},
+    {v:'Ansiedade de performance como gatilho constante.',s:'Medo de falhar mantém o sistema simpático ativado continuamente.',c:'Hipervigilância crônica depleta o cortisol e inverte o ciclo de regulação — criando o ambiente perfeito para compensação.'},
+  ],
+  /* Q5 — horas de sono */
+  [
+    {v:'Privação de sono crítica identificada.',s:'Menos de 6h aumenta o impulso por compensação em até 45%.',c:'Grelina sobe 28% com privação de sono — hormônio diretamente ligado ao ciclo de impulso comportamental.'},
+    {v:'Sono limítrofe — regulação comprometida.',s:'6-7h é o intervalo de maior risco para depleção do córtex pré-frontal.',c:'Sono insuficiente reduz a conectividade entre amígdala e córtex em 37% — a base da regulação emocional.'},
+    {v:'Janela de sono adequada — mas o padrão persiste.',s:'Isso confirma: o problema não é o sono. É o padrão comportamental.',c:'Sono consistente é a base — mas sem protocolo de interrupção de gatilho, o ciclo continua independente.'},
+    {v:'Sono longo mas não restaurador — sinal de hiperestimulação.',s:'Acordar cansado com 8h+ indica cortisol elevado no ciclo noturno.',c:'Sono fragmentado eleva a atividade da amígdala mesmo com horas suficientes — o sistema de alarme não desliga.'},
+  ],
+  /* Q6 — relação com a comida */
+  [
+    {v:'Válvula de alívio pós-pressão — perfil Executor.',s:'"Relaxar comendo" é o padrão de recompensa mais prevalente no protocolo.',c:'O sistema dopaminérgico aprende que comida = alívio em ciclos repetidos de estresse — uma associação neurológica real.'},
+    {v:'Preenchimento de vazio — perfil Compensador.',s:'Solidão e tédio ativam o mesmo circuito neural da dor física.',c:'Comida emocional ativa o núcleo accumbens de forma similar ao contato humano — o cérebro não distingue.'},
+    {v:'Sistema de punição e recompensa invertido.',s:'Usar comida para punir ou recompensar indica regulação emocional comprometida.',c:'O circuito de auto-regulação perde precisão quando o cortisol cronicamante interfere — e cria esse paradoxo.'},
+    {v:'Comportamento automatizado — piloto automático ativo.',s:'Automatismo indica que o sistema límbico assumiu o controle completamente.',c:'Comportamentos automáticos têm baixa conectividade com o córtex — difíceis de interromper sem protocolo específico.'},
+  ],
+  /* Q7 — o que já tentou */
+  [
+    {v:'Abordagem de restrição — trata sintoma, não a causa.',s:'Estratégias restritivas têm taxa de recaída de 95% em 2 anos.',c:'Restrição calórica eleva o cortisol e intensifica o ciclo de compensação emocional — o oposto do objetivo.'},
+    {v:'Abordagem física — descarga sem reprogramação.',s:'Exercício reduz sintomas mas não endereça os gatilhos comportamentais.',c:'Sem protocolo comportamental paralelo, o padrão cognitivo permanece ativo e retoma em semanas.'},
+    {v:'Abordagem de controle externo — não sustentável.',s:'Controle por app funciona enquanto a motivação inicial está ativa.',c:'Regulação externa não constrói o mecanismo de autorregulação interno necessário para a mudança duradoura.'},
+    {v:'Histórico de múltiplas tentativas frustradas.',s:'Isso é o sinal mais importante: o problema não é falta de esforço.',c:'Falha em múltiplas abordagens indica que o gatilho emocional nunca foi endereçado diretamente — até agora.'},
+  ],
+  /* Q8 — disposição para 15 min/dia */
+  [
+    {v:'Comprometimento total — perfil de alta adesão.',s:'Comprometimento consciente triplica a taxa de conclusão do protocolo.',c:'Intenção de implementação é o preditor mais forte de mudança comportamental duradoura na literatura científica.'},
+    {v:'Comprometimento com ceticismo saudável.',s:'Ceticismo baseado em experiência é sinal de inteligência, não de resistência.',c:'Dúvida não impede mudança — impede o abandono prematuro de abordagens que realmente não funcionam.'},
+    {v:'Abertura exploratória identificada.',s:'Ver antes de comprometer é um perfil analítico — e esse protocolo é transparente.',c:'Exposição gradual ao protocolo reduz a resistência do sistema de defesa comportamental naturalmente.'},
+    {v:'Ceticismo protetor identificado — válido e respeitado.',s:'Já ter sido enganado é razão para exigir mais. Esse protocolo não pede fé — pede 7 dias.',c:'O ceticismo como mecanismo de defesa é uma resposta adaptativa a fracassos anteriores. Faz sentido tê-lo.'},
+  ],
+];
+
+/* ── Helper: pergunta atual via DOM ── */
+function getQIdx(){
+  var t=document.getElementById('qStep');
+  if(!t)return 0;
+  var m=t.textContent.match(/(\d+)/);
+  return m?parseInt(m[1])-1:0;
+}
+
+/* ── Atualiza glow ambiente + barra temática ── */
+function updateQuizAmbient(idx){
+  var th=QUIZ_THEMES[idx]||QUIZ_THEMES[0];
+  var amb=document.getElementById('quiz-ambient');
+  if(amb)amb.style.background='radial-gradient(ellipse at '+th.gx+' '+th.gy+', rgba(255,107,0,.09) 0%, transparent 62%)';
+  var ic=document.getElementById('q-theme-icon');
+  var lb=document.getElementById('q-theme-label');
+  if(ic){ic.textContent=th.icon;ic.style.animation='none';requestAnimationFrame(function(){ic.style.animation='';});}
+  if(lb)lb.textContent=th.label;
+}
+
+/* ── Mostra insight após seleção ── */
+function showQuizInsight(optIdx){
+  var qIdx=getQIdx();
+  var data=QUIZ_INSIGHTS[qIdx]&&QUIZ_INSIGHTS[qIdx][optIdx];
+  if(!data)return;
+  var card=document.getElementById('quiz-insight');
+  var v=document.getElementById('qi-v');
+  var s=document.getElementById('qi-s');
+  var c=document.getElementById('qi-c');
+  if(!card||!v||!s||!c)return;
+  v.textContent=data.v;
+  s.textContent=data.s;
+  c.textContent=data.c;
+  card.style.display='block';
+  card.style.animation='none';
+  requestAnimationFrame(function(){card.style.animation='insightin .45s var(--ease) both';});
+}
+
+/* ── Esconde insight e anima próxima pergunta ── */
+function hideQuizInsight(){
+  var card=document.getElementById('quiz-insight');
+  if(card)card.style.display='none';
+  /* anima entrada da nova pergunta */
+  var qEl=document.getElementById('qText');
+  var oEl=document.getElementById('qOpts');
+  [qEl,oEl].forEach(function(el){
+    if(!el)return;
+    el.classList.remove('q-enter');
+    requestAnimationFrame(function(){el.classList.add('q-enter');});
+  });
+}
+
+/* ── Wrap em selectQ para mostrar insight ── */
+(function(){
+  var orig=window.selectQ;
+  window.selectQ=function(i,el,parent){
+    orig(i,el,parent);
+    showQuizInsight(i);
+  };
+})();
+
+/* ── Wrap em renderQ para esconder insight e atualizar tema ── */
+(function(){
+  var orig=window.renderQ;
+  window.renderQ=function(){
+    orig();
+    hideQuizInsight();
+    updateQuizAmbient(getQIdx());
+  };
+})();
+
 /* ── PARTICLES ── */
 (function(){
   var canvas=document.getElementById('ptcl-canvas');
