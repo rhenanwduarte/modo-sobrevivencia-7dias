@@ -288,6 +288,58 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
 .d7-item .di-d{font-size:8px;color:var(--g2);text-transform:uppercase;}
 .d7-item.done7 .di-d{color:var(--green);}
 .d7-item .di-i{font-size:16px;}
+
+/* ── APP HEADER (dias 1-7) ── */
+#app-header{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(7,9,14,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);padding:10px 20px;z-index:150;display:none;align-items:center;gap:10px;}
+#app-header.show{display:flex;}
+#app-header img{height:32px;object-fit:contain;}
+#app-header .ah-brand{font-family:var(--fh);font-weight:900;font-size:14px;letter-spacing:.1em;color:var(--og);}
+.day-scr{padding-top:56px;}
+
+/* ── WELCOME REDESIGN ── */
+#screen-welcome{display:none;flex-direction:column;min-height:100vh;padding:0 0 60px;position:relative;overflow-x:hidden;}
+#screen-welcome.active{display:block;animation:sci .36s var(--ease) forwards;}
+#ptcl-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.wl-rel{position:relative;z-index:1;}
+
+/* Badge animado */
+.wl-badge-anim{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--og);background:var(--oglo);border:1px solid var(--ogmd);animation:badgepulse 3s ease-in-out infinite;}
+@keyframes badgepulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.3);}50%{box-shadow:0 0 0 8px rgba(255,107,0,0);}}
+
+/* Headline reveal */
+.hl-line{display:inline-block;opacity:0;transform:translateY(40px);animation:hlreveal .65s var(--ease) forwards;animation-delay:var(--hl-delay,0ms);}
+@keyframes hlreveal{to{opacity:1;transform:translateY(0);}}
+
+/* Pattern chips */
+.pattern-chip{display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:13px;color:var(--g1);opacity:0;transform:translateY(8px);animation:chipin .5s var(--ease) forwards;animation-delay:var(--chip-delay,0ms);}
+@keyframes chipin{to{opacity:1;transform:translateY(0);}}
+.pattern-chip strong{color:var(--white);}
+
+/* Unlock cards */
+.unlock-card{display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:12px;backdrop-filter:blur(8px);opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+.unlock-card.visible{opacity:1;transform:translateY(0);}
+.uc-icon{font-size:22px;flex-shrink:0;width:44px;height:44px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.uc-title{font-family:var(--fh);font-weight:700;font-size:16px;margin-bottom:4px;color:var(--white);}
+.uc-desc{font-size:13px;color:var(--g1);line-height:1.5;}
+
+/* Floating CTA mobile */
+#float-cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(80px);width:100%;max-width:480px;background:var(--og);padding:16px 24px;z-index:190;transition:transform .3s ease-out;cursor:pointer;box-shadow:0 -4px 32px rgba(255,107,0,.35);}
+#float-cta.visible{transform:translateX(-50%) translateY(0);}
+.float-cta-inner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--fh);font-weight:900;font-size:17px;color:#fff;letter-spacing:.06em;}
+
+/* ── OFFER SECTION (pós-diagnóstico) ── */
+.offer-anchor{padding:16px 18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-bottom:14px;font-size:14px;color:var(--g1);line-height:1.7;}
+.offer-anchor strong{color:var(--og);}
+.offer-checklist{display:flex;flex-direction:column;gap:0;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:12px;padding:4px 16px;margin-bottom:14px;}
+.offer-checklist-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:var(--g1);opacity:0;transform:translateX(-8px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
+.offer-checklist-item:last-child{border-bottom:none;}
+.offer-checklist-item.visible{opacity:1;transform:translateX(0);}
+.chk-circle{width:20px;height:20px;border-radius:50%;background:rgba(46,204,113,.15);border:1.5px solid rgba(46,204,113,.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);}
+.offer-guarantee{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-left:3px solid var(--og);background:rgba(255,107,0,.04);border-radius:0 10px 10px 0;margin-bottom:14px;}
+.offer-proof{text-align:center;padding:10px 16px;background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.12);border-radius:10px;margin-bottom:14px;font-size:13px;color:var(--g1);}
+.offer-proof strong{color:var(--og);font-family:var(--fh);font-size:16px;}
+.offer-urgency{text-align:center;padding:12px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:10px;margin-bottom:18px;font-size:13px;color:var(--g2);line-height:1.6;}
+.offer-urgency strong{color:var(--white);}
 </style>
 </head>
 <body>
@@ -298,28 +350,143 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
   <div class="ld-brand">MODO SOBREVIVÊNCIA</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
+<div id="app-header">
+  <img src="logo_modo_sobrevivencia.png" alt="Modo Sobrevivência">
+  <span class="ah-brand">MODO SOBREVIVÊNCIA</span>
+</div>
 <div id="app">
 
 <!-- WELCOME -->
 <section class="screen" id="screen-welcome">
-  <div class="wl-glow"></div>
-  <div class="wl-top">
-    <div class="wl-logo">
-      <div class="wl-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="white" stroke-width="1.8"/><circle cx="9" cy="10" r="1.3" fill="white"/><circle cx="15" cy="10" r="1.3" fill="white"/><path d="M9 14.5Q12 17 15 14.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <span class="wl-brand">MODO SOBREVIVÊNCIA</span>
+  <canvas id="ptcl-canvas"></canvas>
+  <div class="wl-rel">
+
+    <!-- ── HERO ── -->
+    <div style="padding:52px 24px 40px;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <!-- Logo -->
+        <div style="text-align:center;margin-bottom:28px;">
+          <img src="logo_modo_sobrevivencia.png" alt="Modo Sobrevivência" style="max-height:80px;display:block;margin:0 auto;object-fit:contain;">
+        </div>
+        <!-- Badge -->
+        <div style="text-align:center;margin-bottom:22px;">
+          <span class="wl-badge-anim">PROTOCOLO COMPORTAMENTAL MASCULINO</span>
+        </div>
+        <!-- Headline animada -->
+        <h1 class="wl-h1" style="margin-bottom:20px;">
+          <span class="hl-line" style="--hl-delay:0ms">SEU CÉREBRO</span><br>
+          <span class="hl-line" style="--hl-delay:150ms">ESTÁ NO</span><br>
+          <span class="hl-line" style="--hl-delay:300ms"><em>MODO</em></span><br>
+          <span class="hl-line" style="--hl-delay:450ms"><em>SOBREVIVÊNCIA.</em></span>
+        </h1>
+        <p class="wl-sub" style="margin-bottom:0;">O estresse crônico ativou um mecanismo que aciona o ciclo de compensação e usa a comida como válvula de escape. Em 7 dias, você vai desligar esse sistema.</p>
+      </div>
+
+      <!-- Stats + CTA -->
+      <div class="wl-bottom" style="margin-top:36px;">
+        <div class="wl-stats">
+          <div class="wl-stat"><div class="wl-stat-val">7</div><div class="wl-stat-lbl">Dias</div></div>
+          <div class="wl-stat"><div class="wl-stat-val">15'</div><div class="wl-stat-lbl">Por dia</div></div>
+          <div class="wl-stat"><div class="wl-stat-val">3</div><div class="wl-stat-lbl">Perfis</div></div>
+        </div>
+        <button class="btn btn-og btn-pulse" id="main-quiz-btn" onclick="showScreen('quiz')">FAZER MEU DIAGNÓSTICO GRÁTIS <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--g2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z"/></svg>100% gratuito · 2 minutos · resultado imediato</div>
+      </div>
     </div>
-    <div class="wl-eyebrow">Protocolo Comportamental Masculino</div>
-    <h1 class="wl-h1">SEU CORPO<br>NÃO É O<br><em>PROBLEMA.</em></h1>
-    <p class="wl-sub">O estresse crônico ativou o Modo Sobrevivência — um sistema que faz seu corpo acumular gordura e buscar comida como válvula de escape. Em 7 dias, você vai desligar esse sistema.</p>
-  </div>
-  <div class="wl-bottom">
-    <div class="wl-stats">
-      <div class="wl-stat"><div class="wl-stat-val">7</div><div class="wl-stat-lbl">Dias</div></div>
-      <div class="wl-stat"><div class="wl-stat-val">15'</div><div class="wl-stat-lbl">Por dia</div></div>
-      <div class="wl-stat"><div class="wl-stat-val">3</div><div class="wl-stat-lbl">Perfis</div></div>
+
+    <!-- ── PROVA SOCIAL ── -->
+    <div style="padding:0 24px 32px;">
+
+      <!-- Counter -->
+      <div style="text-align:center;padding:28px 20px;background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.15);border-radius:16px;margin-bottom:16px;">
+        <div style="font-family:var(--fh);font-weight:900;font-size:54px;color:var(--og);line-height:1;letter-spacing:-.02em;" id="diag-counter">0</div>
+        <div style="font-family:var(--fh);font-weight:700;font-size:16px;color:var(--white);margin:4px 0 6px;">diagnósticos comportamentais realizados</div>
+        <div style="font-size:13px;color:var(--g1);">homens identificaram seus gatilhos com esse protocolo</div>
+      </div>
+
+      <!-- Chips de padrões -->
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <div class="pattern-chip" style="--chip-delay:200ms">
+          <span style="font-size:16px;">⚡</span>
+          <span><strong>Compensação noturna</strong> — padrão mais comum</span>
+        </div>
+        <div class="pattern-chip" style="--chip-delay:400ms">
+          <span style="font-size:16px;">🔄</span>
+          <span><strong>Ciclo estresse-impulso</strong> — 61% dos perfis</span>
+        </div>
+        <div class="pattern-chip" style="--chip-delay:600ms">
+          <span style="font-size:16px;">🧠</span>
+          <span><strong>Gatilho emocional pós-trabalho</strong> — presente em 78% dos casos</span>
+        </div>
+      </div>
+
+      <!-- Barra de validação -->
+      <div style="padding:16px 20px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-bottom:0;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);text-align:center;margin-bottom:14px;">Protocolo baseado em neurofisiologia do estresse masculino</div>
+        <div style="display:flex;justify-content:space-around;gap:8px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="var(--og)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="var(--og)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span style="font-size:10px;color:var(--g1);text-align:center;line-height:1.3;">Sem restrição<br>alimentar</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--og)" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="var(--og)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span style="font-size:10px;color:var(--g1);text-align:center;line-height:1.3;">15min<br>por dia</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="var(--og)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:10px;color:var(--g1);text-align:center;line-height:1.3;">Resultado<br>em 7 dias</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-og btn-pulse" onclick="showScreen('quiz')">FAZER MEU DIAGNÓSTICO GRÁTIS <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
-    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--g2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z"/></svg>100% gratuito · 2 minutos · resultado imediato</div>
+
+    <!-- ── CARDS: O QUE VOCÊ VAI DESBLOQUEAR ── -->
+    <div style="padding:0 24px 32px;">
+      <div style="font-family:var(--fh);font-weight:900;font-size:22px;text-align:center;margin-bottom:16px;letter-spacing:-.01em;">O QUE VOCÊ VAI <em style="color:var(--og);">DESBLOQUEAR</em></div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="unlock-card obs-fade">
+          <div class="uc-icon">🧠</div>
+          <div>
+            <div class="uc-title">Identificar seus gatilhos</div>
+            <div class="uc-desc">Cada perfil tem padrões distintos. O protocolo mapeia o seu.</div>
+          </div>
+        </div>
+        <div class="unlock-card obs-fade">
+          <div class="uc-icon">⚡</div>
+          <div>
+            <div class="uc-title">Instalar um mecanismo de interrupção</div>
+            <div class="uc-desc">Antes do comportamento automático se ativar.</div>
+          </div>
+        </div>
+        <div class="unlock-card obs-fade">
+          <div class="uc-icon">🔄</div>
+          <div>
+            <div class="uc-title">Substituir a válvula de escape</div>
+            <div class="uc-desc">Sem suprimir — redirecionando o sistema.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GARANTIA ── -->
+    <div style="padding:0 24px 40px;">
+      <div class="offer-guarantee" style="margin-bottom:0;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="var(--og)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="var(--og)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>
+          <div style="font-family:var(--fh);font-weight:700;font-size:16px;color:var(--white);margin-bottom:4px;">7 dias de garantia total</div>
+          <div style="font-size:13px;color:var(--g1);line-height:1.6;">Se o protocolo não gerar resultado, a Hotmart devolve 100% — sem burocracia, sem perguntas.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- wl-rel -->
+
+  <!-- Floating CTA mobile -->
+  <div id="float-cta" onclick="showScreen('quiz')">
+    <div class="float-cta-inner">
+      FAZER MEU DIAGNÓSTICO GRÁTIS
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg>
+    </div>
   </div>
 </section>
 
@@ -405,9 +572,50 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;
         <div style="display:flex;gap:12px;font-size:14px;color:var(--g1)"><span style="color:var(--og);font-weight:700;flex-shrink:0">03</span>Substitui a comida como único amortecedor emocional disponível</div>
       </div>
     </div>
+    <!-- ── OFERTA EXPANDIDA ── -->
+
+    <!-- A) Âncora de valor -->
+    <div class="offer-anchor">
+      Psicólogos comportamentais cobram <strong>R$300–500 por sessão</strong> para mapear exatamente isso. O protocolo completo sai por <strong style="font-size:16px;">R$37.</strong>
+    </div>
+
+    <!-- B) Checklist animado -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:8px;">O que está incluído</div>
+    <div class="offer-checklist" id="offer-checklist">
+      <div class="offer-checklist-item" data-idx="0"><div class="chk-circle">✓</div><span>Diagnóstico do seu perfil comportamental</span></div>
+      <div class="offer-checklist-item" data-idx="1"><div class="chk-circle">✓</div><span>7 dias de protocolo personalizado (15min/dia)</span></div>
+      <div class="offer-checklist-item" data-idx="2"><div class="chk-circle">✓</div><span>Mecanismo de interrupção do gatilho</span></div>
+      <div class="offer-checklist-item" data-idx="3"><div class="chk-circle">✓</div><span>Mapa de tensão interativo</span></div>
+      <div class="offer-checklist-item" data-idx="4"><div class="chk-circle">✓</div><span>Protocolo noturno anti-compensação</span></div>
+      <div class="offer-checklist-item" data-idx="5"><div class="chk-circle">✓</div><span>Identificador de identidade comportamental</span></div>
+      <div class="offer-checklist-item" data-idx="6"><div class="chk-circle">✓</div><span>Acesso ao Protocolo 21 Dias no Dia 7</span></div>
+    </div>
+
+    <!-- C) Garantia -->
+    <div class="offer-guarantee">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" stroke="var(--og)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="var(--og)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div>
+        <div style="font-family:var(--fh);font-weight:700;font-size:15px;color:var(--white);margin-bottom:3px;">7 dias de garantia total</div>
+        <div style="font-size:13px;color:var(--g1);line-height:1.6;">Se o protocolo não gerar resultado, a Hotmart devolve 100% — sem burocracia, sem perguntas.</div>
+      </div>
+    </div>
+
+    <!-- D) Prova social numérica -->
+    <div class="offer-proof">
+      <strong>2.847</strong> diagnósticos realizados · Protocolo ativo
+    </div>
+
+    <!-- E) Urgência comportamental -->
+    <div class="offer-urgency">
+      <strong>Seu diagnóstico expira quando você fechar esta aba.</strong><br>
+      O padrão identificado não vai esperar.
+    </div>
+
+    <!-- F) Input + CTA principal -->
     <div style="padding:0 0 8px">
       <input id="nameInput" type="text" placeholder="Seu nome antes de começar..." style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 18px;font-size:18px;color:var(--white);width:100%;outline:none;margin-bottom:14px;transition:border-color .2s" oninput="checkRepName()" onfocus="this.style.borderColor='var(--og)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
-      <button class="btn btn-og" id="btnStart" style="opacity:.28;pointer-events:none" onclick="startProtocol()">QUERO O PROTOCOLO 7 DIAS — R$37 <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+      <button class="btn btn-og btn-pulse" id="btnStart" style="opacity:.28;pointer-events:none" onclick="startProtocol()">QUERO O PROTOCOLO 7 DIAS — R$37 <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/></svg></button>
+      <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--g2);">🔒 Pagamento seguro via Hotmart · Garantia de 7 dias</div>
       <button class="btn btn-ghost" style="margin-top:10px;font-size:13px" onclick="acessarProtocolo()">Já comprei — acessar o protocolo</button>
     </div>
   </div>
@@ -853,6 +1061,135 @@ async function authVerify(){
     btn.disabled=false;btn.textContent='VERIFICAR E ACESSAR';btn.style.opacity='1';
   }
 }
+</script>
+<script>
+/* ── PARTICLES ── */
+(function(){
+  var canvas=document.getElementById('ptcl-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var w,h,pts=[];
+  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+  function mkPts(){pts=Array.from({length:40},function(){return{x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45};});}
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      for(var j=i+1;j<pts.length;j++){
+        var q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<140){ctx.beginPath();ctx.strokeStyle='rgba(255,107,0,'+(0.15*(1-d/140))+')';ctx.lineWidth=.6;ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}
+      }
+      ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,Math.PI*2);ctx.fillStyle='rgba(255,107,0,.28)';ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  resize();mkPts();draw();
+  window.addEventListener('resize',function(){resize();mkPts();});
+})();
+
+/* ── COUNTER ── */
+function animCounter(el,target,dur){
+  var start=null;
+  function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);el.textContent=Math.floor(p*target).toLocaleString('pt-BR');if(p<1)requestAnimationFrame(step);else el.textContent=target.toLocaleString('pt-BR');}
+  requestAnimationFrame(step);
+}
+
+/* ── INTERSECTION OBSERVER — unlock cards ── */
+function initUnlockCards(){
+  var cards=document.querySelectorAll('.unlock-card.obs-fade');
+  if(!cards.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry,i){
+      if(entry.isIntersecting){
+        var idx=Array.from(cards).indexOf(entry.target);
+        setTimeout(function(){entry.target.classList.add('visible');},idx*130);
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  cards.forEach(function(c){obs.observe(c);});
+}
+
+/* ── INTERSECTION OBSERVER — offer checklist ── */
+function initChecklist(){
+  var items=document.querySelectorAll('.offer-checklist-item');
+  if(!items.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var idx=parseInt(entry.target.dataset.idx||0);
+        setTimeout(function(){entry.target.classList.add('visible');},idx*90);
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.1});
+  items.forEach(function(el){obs.observe(el);});
+}
+
+/* ── FLOATING CTA ── */
+function initFloatCTA(){
+  var floatBtn=document.getElementById('float-cta');
+  var mainBtn=document.getElementById('main-quiz-btn');
+  if(!floatBtn||!mainBtn)return;
+  var shown=false;
+  function checkScroll(){
+    var welcome=document.getElementById('screen-welcome');
+    if(!welcome||!welcome.classList.contains('active')){floatBtn.classList.remove('visible');shown=false;return;}
+    if(window.scrollY>300&&!shown){shown=true;floatBtn.classList.add('visible');}
+  }
+  window.addEventListener('scroll',checkScroll,{passive:true});
+  var btnObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){floatBtn.classList.remove('visible');shown=false;}
+      else if(window.scrollY>300){
+        var welcome=document.getElementById('screen-welcome');
+        if(welcome&&welcome.classList.contains('active')){floatBtn.classList.add('visible');shown=true;}
+      }
+    });
+  },{threshold:.5});
+  btnObs.observe(mainBtn);
+}
+
+/* ── APP HEADER ── */
+(function(){
+  var origShow=window.showScreen;
+  window.showScreen=function(id){
+    origShow(id);
+    var hdr=document.getElementById('app-header');
+    if(hdr){var show=(id.startsWith('day-')||id==='report');hdr.classList.toggle('show',show);}
+    /* hide particles outside welcome */
+    var cv=document.getElementById('ptcl-canvas');
+    if(cv)cv.style.display=(id==='welcome')?'block':'none';
+    /* reset float CTA */
+    var fc=document.getElementById('float-cta');
+    if(fc&&id!=='welcome')fc.classList.remove('visible');
+    /* trigger counter when welcome becomes active */
+    if(id==='welcome'){
+      if(cv)cv.style.display='block';
+      var el=document.getElementById('diag-counter');
+      if(el&&el.textContent==='0')animCounter(el,2847,2000);
+      initUnlockCards();
+    }
+    /* trigger checklist when report becomes active */
+    if(id==='report'){setTimeout(initChecklist,500);}
+  };
+})();
+
+/* ── INIT on load ── */
+document.addEventListener('DOMContentLoaded',function(){
+  /* counter fires when welcome screen is first shown */
+  var el=document.getElementById('diag-counter');
+  if(el){
+    var obs=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){animCounter(el,2847,2000);obs.disconnect();}
+    },{threshold:.1});
+    obs.observe(el);
+  }
+  initUnlockCards();
+  initChecklist();
+  initFloatCTA();
+});
 </script>
 </body>
 </html>
