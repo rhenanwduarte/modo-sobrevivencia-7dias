@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\Sinval\\\\modo-sobrevivencia-7dias\\\\index.html\"\\).Count)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "PowerShell(Rename-Item \"C:\\\\Users\\\\Sinval\\\\modo-sobrevivencia-7dias\\\\logo modo sobrevivencia.png\" \"logo_modo_sobrevivencia.png\")",
+      "Bash(npx vercel *)"
+    ]
+  }
+}
